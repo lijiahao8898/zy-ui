@@ -1,4 +1,4 @@
-# zy-ui
+# zy-libraries
 
 ## Project setup
 ```
@@ -20,5 +20,19 @@ npm run build
 npm run lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### build lib to publish npm
+```
+npm run lib
+```
+
+## how to use
+```
+npm install zy-libraries --save
+
+import zyLibraries from 'zy-libraries';
+import 'zy-libraries/lib/zy-libraries.css'
+
+Vue.use(zyLibraries)
+
+<zy-item></zy-item>
+```

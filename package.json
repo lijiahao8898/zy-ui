@@ -1,8 +1,8 @@
 {
-  "name": "zy-ui",
+  "name": "zy-libraries",
   "version": "0.1.0",
-  "description": "zy-ui",
-  "keyword": "zy-ui ui",
+  "description": "zy-libraries",
+  "keyword": "zy-libraries",
   "author": "lijiahao8898 <472239548@qq.com>",
   "license": "MIT",
   "private": false,
@@ -16,9 +16,9 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "start": "npm run serve",
-    "lib": "vue-cli-service build --target lib --name zy-ui --dest lib packages/index.js"
+    "lib": "vue-cli-service build --target lib --name zy-libraries --dest lib packages/index.js"
   },
-  "main": "lib/zy-ui.umd.min.js",
+  "main": "lib/zy-libraries.umd.min.js",
   "dependencies": {
     "core-js": "^3.6.5",
     "vue": "^2.6.11"
