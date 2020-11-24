@@ -42,8 +42,8 @@ Vue.use(zyLibraries)
 
 ```js
 import { Button } from 'components'
-// 转换成
 
+// 转换成
 var button = require('components/lib/button')
 require('components/lib/button/style.css')
 ```
@@ -67,8 +67,8 @@ require('components/lib/button/style.css')
 以下代码会被转换
 ```js
 import {Button,Icon} fron 'element-ui'
-// 转成成
 
+// 转成成
 const Button = require('element-ui/lib/button.js')
 require('element-ui/theme-chalk/button.css')
 
@@ -76,6 +76,29 @@ const Icon = require('element-ui/lib/icon.js')
 require('element-ui/theme-chalk/icon.css')
 ```
 其中在引入css的时候，其中的`theme-chalk`路径是通过`.babelrc`文件中的`styleLibraryName`确定的，引入js的时候，
-其中的lib是通过`.babelrc`文件中的`libDir`属性决定的，只不过这个属性的默认值是`lib`；
+其中的`lib`是通过`.babelrc`文件中的`libDir`属性决定的，只不过这个属性的默认值是`lib`；
 
+## zy-libraries 的按需引入
 
+`.babelrc`配置
+```
+{
+  "presets": [["env", { "modules": false }]],
+  "plugins": [
+    [
+      "component",
+      {
+        "libraryName": "zy-libraries",
+        "style": true
+      }
+    ]
+  ]
+}
+```
+最终会查找到 `zy-libraries/lib`
+
+`main.js`配置或者在相应使用到的地方
+```
+import {zyItem} from 'zy-libraries';
+Vue.use(zyItem);
+```
