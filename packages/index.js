@@ -1,6 +1,7 @@
 import zyItem from './item/index';
+import zyButton from './button/index'
 
-const components = [zyItem]
+const components = [zyItem, zyButton]
 
 const install = (Vue) => {
     if(install.installed) return
