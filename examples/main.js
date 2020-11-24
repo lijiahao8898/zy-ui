@@ -3,8 +3,10 @@ import App from './App.vue'
 
 Vue.config.productionTip = false
 
-import zyItem from '../packages/index'
-Vue.use(zyItem)
+import zyLibrary from '../packages/index'
+Vue.use(zyLibrary)
+
+console.log(zyLibrary)
 
 new Vue({
   render: h => h(App),

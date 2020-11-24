@@ -1,6 +1,6 @@
 {
   "name": "zy-libraries",
-  "version": "0.2.0",
+  "version": "0.3.1",
   "description": "zy-libraries",
   "keyword": "zy-libraries",
   "author": "lijiahao8898 <472239548@qq.com>",
@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
+    "element-ui": "^2.14.1",
     "vue": "^2.6.11"
   },
   "devDependencies": {

@@ -1,6 +1,9 @@
 <template>
   <div id="app">
     <zy-item label="标签">你好，世界！</zy-item>
+    <zy-button />
+    <zy-button />
+    <el-button>1</el-button>
   </div>
 </template>
 
