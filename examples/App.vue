@@ -1,15 +1,44 @@
 <template>
     <div id="app">
-        <zy-item label="标签">你好，世界！</zy-item>
-        <zy-button/>
-        <zy-button/>
+        <div class="example">
+            <div class="example-title">条目</div>
+            <div class="example-component">
+                <div class="example-component__item">
+                    <zy-item label="标签">你好，世界！</zy-item>
+                </div>
+            </div>
+        </div>
+
+        <div class="example">
+            <div class="example-title">条目</div>
+            <div class="example-component">
+                <div class="example-component__item">
+                    <zy-button/>
+                </div>
+            </div>
+        </div>
 <!--        <el-button>1</el-button>-->
 
         <div class="example">
-            <div class="example-title">进度条【zyProgress】</div>
+            <div class="example-title">进度条</div>
             <div class="example-component">
                 <div class="example-component__item">
                     <zy-progress :progress="20" :total="300"></zy-progress>
+                </div>
+            </div>
+        </div>
+
+        <div class="example">
+            <div class="example-title">饼状进度条</div>
+            <div class="example-component">
+                <div class="example-component__item">
+                    <zy-pie
+                        value="80"
+                        ring="0"
+                        isShowNumber="false"
+                        color="#FFA958"
+                        size="36">
+                    </zy-pie>
                 </div>
             </div>
         </div>
@@ -31,6 +60,7 @@ export default {
     text-align: center;
     color: #2c3e50;
     margin-top: 60px;
+    background: #ECEDF6;
 }
 
 .example {

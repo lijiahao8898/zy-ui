@@ -1,9 +1,10 @@
-import zyItem from './item/index';
-import zyButton from './button/index'
-import zyProgress from './progress/index'
+import Item from './item/index';
+import Button from './button/index'
+import Progress from './progress/index'
+import Pie from './pie/index'
 // import ele from './ele/index'
 
-const components = [zyItem, zyButton, zyProgress]
+const components = [Item, Button, Progress, Pie]
 
 const install = (Vue) => {
     if(install.installed) return
