@@ -6,8 +6,6 @@ Vue.config.productionTip = false
 import zyLibrary from '../packages/index'
 Vue.use(zyLibrary)
 
-console.log(zyLibrary)
-
 new Vue({
   render: h => h(App),
 }).$mount('#app')

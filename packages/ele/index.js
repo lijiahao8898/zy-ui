@@ -2,7 +2,7 @@
 import * as element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
-console.log(element);
+// console.log(element);
 
 // element.install = (Vue) => {
 //     Object.keys(element).forEach(key => {

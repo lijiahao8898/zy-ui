@@ -1,8 +1,9 @@
 import zyItem from './item/index';
 import zyButton from './button/index'
-import ele from './ele/index'
+import zyProgress from './progress/index'
+// import ele from './ele/index'
 
-const components = [zyItem, zyButton]
+const components = [zyItem, zyButton, zyProgress]
 
 const install = (Vue) => {
     if(install.installed) return
@@ -10,7 +11,7 @@ const install = (Vue) => {
     components.map(component => {
         Vue.component(component.name, component)
     })
-    Vue.use(ele)
+    // Vue.use(ele)
 }
 
 if (typeof window !== 'undefined' && window.Vue) {
