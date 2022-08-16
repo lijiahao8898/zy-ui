@@ -17,14 +17,18 @@ console.log(`-----------${process.env.NODE_ENV}---------------`)
 if(process.env.NODE_ENV === 'production') {
     module.exports = {
         outputDir: 'lib',
+        productionSourceMap: false,
         configureWebpack: {
             entry: entries,
             output: {
                 filename: '[name]/index.js',
+                // libraryTarget: 'commonjs2',
                 libraryTarget: 'commonjs2',
+                // umdNamedDefine: true,
+                // globalObject: 'typeof self !== \'undefined\' ? self : this',
                 libraryExport: 'default',
                 // 已经设置 libraryTarget: 'commonjs2'，无需设置 library
-                // library: 'zy-libraries',
+                library: 'zy-libraries',
             },
             resolve: {
                 extensions: ['.js', '.vue', '.json'],
@@ -36,7 +40,7 @@ if(process.env.NODE_ENV === 'production') {
             },
         },
         css: {
-            sourceMap: true,
+            sourceMap: false,
             extract: {
                 filename: '[name]/style.css'
             }

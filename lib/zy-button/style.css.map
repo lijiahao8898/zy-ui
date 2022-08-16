@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack:///packages/button/src/button.vue"],"names":[],"mappings":"AAaA,WACI,uBAAwB,CACxB,UAAY","file":"style.css","sourcesContent":["\n\n\n\n\n\n\n\n\n\n\n\n\n.zy-button {\n    background-color: maroon;\n    color: white;\n}\n"]}
