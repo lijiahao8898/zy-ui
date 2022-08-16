@@ -2,5 +2,7 @@
   "index": "./packages/index.js",
   "zy-item": "./packages/item/index.js",
   "zy-button": "./packages/button/index.js",
-  "zy-progress": "./packages/progress/index.js"
+  "zy-progress": "./packages/progress/index.js",
+  "zy-star-score": "./packages/starScore/index.js",
+  "zy-insurance-select": "./packages/insuranceSelect/index.js"
 }

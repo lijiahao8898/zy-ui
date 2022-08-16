@@ -66,7 +66,7 @@ require('components/lib/button/style.css')
 ```
 以下代码会被转换
 ```js
-import {Button,Icon} fron 'element-ui'
+import {Button,Icon} from 'element-ui'
 
 // 转成成
 const Button = require('element-ui/lib/button.js')
