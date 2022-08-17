@@ -1,5 +1,5 @@
 {
-  "main": "./packages/index.js",
+  "entry": "./packages/index.js",
   "zy-item": "./packages/item/index.js",
   "zy-button": "./packages/button/index.js",
   "zy-progress": "./packages/progress/index.js",

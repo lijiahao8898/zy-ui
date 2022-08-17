@@ -12,7 +12,7 @@ const resolve = (dir) => path.join(__dirname, '../', dir)
 
 console.log(entries);
 
-console.log(`-----------${process.env.NODE_ENV}---------------`)
+console.log(`-----------${JSON.stringify(process.env)}---------------`)
 
 if(process.env.NODE_ENV === 'production') {
     module.exports = {
@@ -28,7 +28,7 @@ if(process.env.NODE_ENV === 'production') {
                 // globalObject: 'typeof self !== \'undefined\' ? self : this',
                 libraryExport: 'default',
                 // 已经设置 libraryTarget: 'commonjs2'，无需设置 library
-                library: 'zy-libraries',
+                // library: 'zy-libraries',
             },
             resolve: {
                 extensions: ['.js', '.vue', '.json'],
