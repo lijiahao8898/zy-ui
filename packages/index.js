@@ -4,9 +4,10 @@ import Progress from './progress'
 import Pie from './pie'
 import StarScore from './starScore'
 import InsuranceSelect from "./insuranceSelect";
+import Flip from './flip';
 // import ele from './ele/index'
 
-const components = [Item, Button, Progress, Pie, StarScore, InsuranceSelect]
+const components = [Item, Button, Progress, Pie, StarScore, InsuranceSelect, Flip]
 
 const install = (Vue) => {
     if(install.installed) return

@@ -161,7 +161,28 @@
                 <div class="example-component__item">
 
                     <zy-insurance-select
-                        :row="row" @selected="(row) => insuranceSelectedHandler(row)"
+                        :row="row" @selected="(item) => insuranceSelectedHandler('row', item)"
+                        :optionListCacheList="[
+                            {
+                                name: '中国人寿财产保险',
+                            },
+                            {
+                                name: '中国平安',
+                            },
+                            {
+                                name: '中国人寿财产保险2',
+                            },
+                            {
+                                name: '中国人寿财产保险3',
+                            },
+                            {
+                                name: '中国人寿财产保险4',
+                            },
+                        ]"
+                    ></zy-insurance-select>
+
+                    <zy-insurance-select
+                        :row="row2" @selected="(item) => insuranceSelectedHandler('row2', item)"
                         :optionListCacheList="[
                             {
                                 name: '中国人寿财产保险',
@@ -183,6 +204,17 @@
                 </div>
             </div>
         </div>
+
+        <!-- 翻牌效果 -->
+        <div class="example">
+            <div class="example-title">翻牌效果</div>
+            <div class="example-component">
+                <div class="example-component__item">
+
+                    <zy-flip></zy-flip>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -192,13 +224,13 @@ export default {
     name: 'App',
     data() {
         return {
-            row: {select: '中国人寿财产保险'}
+            row: {select: '中国人寿财产保险'},
+            row2: {select: '中国人寿财产保险'},
         }
     },
     methods: {
-        insuranceSelectedHandler (row) {
-            console.log(row)
-            this.row.select = row.name;
+        insuranceSelectedHandler (key, row) {
+            this[key].select = row.name;
         }
     }
 }
