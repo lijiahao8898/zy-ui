@@ -39,8 +39,8 @@ export default {
 
 <style lang="scss" scoped>
 .circle-scroll {
-    width: 500px;
-    height: 500px;
+    width: 250px;
+    height: 250px;
     border-radius: 100%;
     border: 1px solid #000;
     position: relative;
@@ -54,6 +54,7 @@ export default {
         .item {
             width: 60px;
             height: 60px;
+            border-radius: 100%;
             margin-right: 0;
             margin-bottom: 0;
             background: #ccc;
