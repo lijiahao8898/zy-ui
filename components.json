@@ -4,5 +4,8 @@
   "zy-button": "./packages/button/index.js",
   "zy-progress": "./packages/progress/index.js",
   "zy-star-score": "./packages/starScore/index.js",
-  "zy-insurance-select": "./packages/insuranceSelect/index.js"
+  "zy-insurance-select": "./packages/insuranceSelect/index.js",
+  "zy-flip": "./packages/flip/index.js",
+  "zy-count-up-slide": "./packages/countUpSlide/index.js",
+  "zy-circle-scroll": "./packages/circleScroll/index.js"
 }

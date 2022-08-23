@@ -226,6 +226,16 @@
                 </div>
             </div>
         </div>
+
+        <div class="example">
+            <div class="example-title">圆形滚动</div>
+            <div class="example-component">
+                <div class="example-component__item">
+
+                    <zy-circle-scroll></zy-circle-scroll>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
