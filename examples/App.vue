@@ -215,6 +215,17 @@
                 </div>
             </div>
         </div>
+
+        <!-- 翻牌效果 - 滑动 -->
+        <div class="example">
+            <div class="example-title">翻牌效果 - 滑动</div>
+            <div class="example-component">
+                <div class="example-component__item">
+
+                    <zy-count-up-slide :number="countUpSlideNumber"></zy-count-up-slide>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -226,7 +237,13 @@ export default {
         return {
             row: {select: '中国人寿财产保险'},
             row2: {select: '中国人寿财产保险'},
+            countUpSlideNumber: 0
         }
+    },
+    mounted() {
+        setTimeout(() => {
+            this.countUpSlideNumber = 2000;
+        }, 2000)
     },
     methods: {
         insuranceSelectedHandler (key, row) {
