@@ -1,5 +1,7 @@
 <template>
-    <canvas id="textRainCanvas"></canvas>
+    <div ref="textRainWrapper" style="width: 100%;">
+        <canvas id="textRainCanvas"></canvas>
+    </div>
 </template>
 
 <script>
@@ -9,30 +11,32 @@ export default {
         return {}
     },
     mounted() {
-        const canvas = document.getElementById('textRainCanvas');
-        const width = 600;
-        const height = 200;
-        const ctx = canvas.getContext('2d');
-        canvas.width = width;
-        canvas.height = height;
-        // 列宽
-        const columnWidth = 20;
-        // 列数
-        const columnCount = Math.floor(600 / columnWidth)
-        // 记录每列写到了第几个文字 初始[1,1,1,1....]
-        const columnNextIndexes = new Array(columnCount);
-        // columnNextIndexes.fill(Math.floor(height / 20) + 2)
-        columnNextIndexes.fill(1)
-        console.log(columnNextIndexes)
+        this.$nextTick(() => {
+            const canvas = document.getElementById('textRainCanvas');
+            const width = this.$refs.textRainWrapper.offsetWidth;
+            const height = 200;
+            const ctx = canvas.getContext('2d');
+            canvas.width = width;
+            canvas.height = height;
+            // 列宽
+            const columnWidth = 20;
+            // 列数
+            const columnCount = Math.floor(width / columnWidth)
+            // 记录每列写到了第几个文字 初始[1,1,1,1....]
+            const columnNextIndexes = new Array(columnCount);
+            // columnNextIndexes.fill(Math.floor(height / 20) + 2)
+            columnNextIndexes.fill(1)
+            console.log(columnNextIndexes)
 
-        let timer = setInterval(() => {
-            this.draw(ctx, columnCount, columnWidth, columnNextIndexes, width, height);
-            console.log(1);
-        }, 40)
+            let timer = setInterval(() => {
+                this.draw(ctx, columnCount, columnWidth, columnNextIndexes, width, height);
+                console.log(1);
+            }, 40)
 
-        this.$once('hook:beforeDestroy',()=>{
-            clearTimeout(timer)
-            timer = null
+            this.$once('hook:beforeDestroy',()=>{
+                clearTimeout(timer)
+                timer = null
+            })
         })
     },
     methods: {
