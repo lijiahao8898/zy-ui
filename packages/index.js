@@ -6,10 +6,11 @@ import StarScore from './starScore'
 import InsuranceSelect from "./insuranceSelect";
 import Flip from './flip';
 import CountUpSlide from './countUpSlide';
-import CircleScroll from "./circleScroll/src/circleScroll";
+import CircleScroll from './circleScroll';
+import TextRain from './textRain'
 // import ele from './ele/index'
 
-const components = [Item, Button, Progress, Pie, StarScore, InsuranceSelect, Flip, CountUpSlide, CircleScroll]
+const components = [Item, Button, Progress, Pie, StarScore, InsuranceSelect, Flip, CountUpSlide, CircleScroll, TextRain]
 
 const install = (Vue) => {
     if(install.installed) return

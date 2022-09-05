@@ -46,6 +46,10 @@ export default {
     position: relative;
     animation: rotateAni linear infinite 20s;
 
+    &:hover {
+        animation-play-state: paused;
+    }
+
     &__item {
         position: absolute;
         top: 50%;

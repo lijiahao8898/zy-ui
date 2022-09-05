@@ -236,6 +236,16 @@
                 </div>
             </div>
         </div>
+
+        <div class="example">
+            <div class="example-title">文字雨特效</div>
+            <div class="example-component">
+                <div class="example-component__item">
+
+                    <zy-text-rain></zy-text-rain>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
