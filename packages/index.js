@@ -8,9 +8,22 @@ import Flip from './flip';
 import CountUpSlide from './countUpSlide';
 import CircleScroll from './circleScroll';
 import TextRain from './textRain'
+import Step from './step'
 // import ele from './ele/index'
 
-const components = [Item, Button, Progress, Pie, StarScore, InsuranceSelect, Flip, CountUpSlide, CircleScroll, TextRain]
+const components = [
+    Item,
+    Button,
+    Progress,
+    Pie,
+    StarScore,
+    InsuranceSelect,
+    Flip,
+    CountUpSlide,
+    CircleScroll,
+    TextRain,
+    Step
+]
 
 const install = (Vue) => {
     if(install.installed) return

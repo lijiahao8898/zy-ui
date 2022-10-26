@@ -246,6 +246,25 @@
                 </div>
             </div>
         </div>
+
+        <div class="example">
+            <div class="example-title">步骤</div>
+            <div class="example-component">
+                <div class="example-component__item">
+
+                    <zy-step></zy-step>
+                </div>
+            </div>
+        </div>
+
+        <div class="example">
+            <div class="example-title">自定义五角星</div>
+            <div class="example-component">
+                <div class="example-component__item">
+                    <div class="star"></div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -266,7 +285,7 @@ export default {
         }, 2000)
     },
     methods: {
-        insuranceSelectedHandler (key, row) {
+        insuranceSelectedHandler(key, row) {
             this[key].select = row.name;
         }
     }
@@ -316,5 +335,42 @@ export default {
 .example-component__item .item {
     margin-right: 20px;
     margin-bottom: 10px;
+}
+
+.star {
+    position: relative;
+    margin: 20px auto;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: transparent transparent red transparent;
+    border-width: 70px 100px;
+    transform: rotate(35deg);
+}
+
+.star::before {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+    top: -128px;
+    left: -95px;
+    border-style: solid;
+    border-color: transparent transparent red transparent;
+    border-width: 80px 30px;
+    transform: rotate(-35deg);
+}
+
+.star::after {
+    position: absolute;
+    content: '';
+    width: 0;
+    height: 0;
+    top: -45px;
+    left: -140px;
+    border-style: solid;
+    border-color: transparent transparent red transparent;
+    border-width: 70px 100px;
+    transform: rotate(-70deg);
 }
 </style>
