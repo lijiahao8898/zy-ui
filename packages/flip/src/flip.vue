@@ -1,11 +1,14 @@
 <template>
-    <div class="flip-wrapper">
-        <!-- 翻牌的外框 -->
-        <div class="flip down" :class="{go: item.go}" v-for="(item, index) in numSplitArr" :key="index">
-            <!-- 位于前面的纸牌 -->
-            <div class="digital front" :class="'number' + getBeforeNum(index)"></div>
-            <!-- 位于后面的纸牌 -->
-            <div class="digital back" :class="'number' + (numArr.includes(item.num) ? item.num : '')"></div>
+    <div>
+<!--        {{numSplitArr}}-->
+        <div class="flip-wrapper">
+            <!-- 翻牌的外框 -->
+            <div class="flip down" :class="{go: item.go}" v-for="(item, index) in numSplitArr" :key="index">
+                <!-- 位于前面的纸牌 -->
+                <div class="digital front" :class="'number' + getBeforeNum(index)"></div>
+                <!-- 位于后面的纸牌 -->
+                <div class="digital back" :class="'number' + (numArr.includes(item.num) ? item.num : '')"></div>
+            </div>
         </div>
     </div>
 </template>
@@ -15,14 +18,14 @@ export default {
     name: 'zy-flip',
     props: {
         decLength: {
-            default: 2
+            default: 1
         },
         digit: {
-            default: 0,
+            default: 400,
             type: Number
         },
         target: {
-            default: 100,
+            default: 515.50,
             type: Number
         },
         timer: {
@@ -30,7 +33,7 @@ export default {
             type: Number
         },
         numberSplit: {
-            default: 20,
+            default: 10,
             type: Number
         }
     },
@@ -66,7 +69,9 @@ export default {
             } else {
                 this.add();
             }
-        }, this.timer / ((this.target - this.num) / this.numberSplit) > 350 ? 350 : this.timer / ((this.target - this.num) / this.numberSplit))
+        }, 350
+            //this.timer / ((this.target - this.num) / this.numberSplit) > 350 ? 350 : this.timer / ((this.target - this.num) / this.numberSplit)
+        )
     },
     methods: {
         reset () {
@@ -87,11 +92,15 @@ export default {
         add() {
             this.num = (this.num + this.numberSplit > this.target ? this.target : this.num + this.numberSplit);
             let numSplitArr = this.num.toString().split('');
+            console.log(numSplitArr)
             if(numSplitArr.length > this.numSplitArr.length) {
-                this.numSplitArr.unshift({
-                    go: true,
-                    num: 0
-                })
+                let between = numSplitArr.length - this.numSplitArr.length;
+                for(let i = 0; i < between; i ++) {
+                    this.numSplitArr.unshift({
+                        go: true,
+                        num: 0
+                    })
+                }
                 this.numSplitArr.forEach((item, index) => {
                     item.go = false
                     if (item.num !== numSplitArr[index]) {
