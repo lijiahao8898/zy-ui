@@ -251,6 +251,21 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- 瀑布流 -->
+                <div class="category-instance__example" v-show="currentCategory === 9">
+                    <div class="example-component">
+                        <div class="example-component__item" style="position: relative;width: calc(100vw - 480px);">
+                            <zy-waterfall ref="waterfallInstance" :len="waterfallList.length" :commonWidth="waterfallItemWidth">
+                                <template v-for="(item, index) in waterfallList">
+                                    <div class="waterfall-item" ref="waterfallItem" :key="index">
+                                        <div class="waterfall-example-div" :style="{height: 50 + Math.floor(Math.random() * 200) + 'px'}">{{item.label}}</div>
+                                    </div>
+                                </template>
+                            </zy-waterfall>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -278,6 +293,20 @@ export default {
                 {label: '文字雨特效'},
                 {label: '步骤'},
                 {label: '自定义五角星'},
+                {label: '瀑布流'}
+            ],
+            waterfallItemWidth: 200,
+            waterfallList: [
+                {label: 1},
+                {label: 2},
+                {label: 3},
+                {label: 4},
+                {label: 5},
+                {label: 6},
+                {label: 7},
+                {label: 8},
+                {label: 9},
+                {label: 10},
             ]
         }
     },
@@ -291,6 +320,13 @@ export default {
                 case '翻牌':
                     setTimeout(() => {
                         this.countUpSlideNumber = 2000;
+                    }, 2000)
+                    break;
+                case  '瀑布流':
+                    setTimeout(() => {
+                        this.$nextTick(() => {
+                            this.$refs.waterfallInstance.setPosition(this.$refs.waterfallItem);
+                        })
                     }, 2000)
                     break;
             }
@@ -400,5 +436,17 @@ export default {
     border-color: transparent transparent red transparent;
     border-width: 70px 100px;
     transform: rotate(-70deg);
+}
+
+.waterfall-item {
+    transition: .3s;
+}
+
+.waterfall-example-div {
+    width: 200px;
+    background: #ccc;
+    font-size: 28px;
+    color: #000;
+    font-weight: bold;
 }
 </style>

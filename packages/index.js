@@ -9,6 +9,7 @@ import CountUpSlide from './countUpSlide';
 import CircleScroll from './circleScroll';
 import TextRain from './textRain'
 import Step from './step'
+import Waterfall from './waterfall'
 // import ele from './ele/index'
 
 const components = [
@@ -22,7 +23,8 @@ const components = [
     CountUpSlide,
     CircleScroll,
     TextRain,
-    Step
+    Step,
+    Waterfall
 ]
 
 const install = (Vue) => {
