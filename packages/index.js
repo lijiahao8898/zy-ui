@@ -10,6 +10,7 @@ import CircleScroll from './circleScroll';
 import TextRain from './textRain'
 import Step from './step'
 import Waterfall from './waterfall'
+import Relation from './Relation'
 // import ele from './ele/index'
 
 const components = [
@@ -24,7 +25,8 @@ const components = [
     CircleScroll,
     TextRain,
     Step,
-    Waterfall
+    Waterfall,
+    Relation
 ]
 
 const install = (Vue) => {
