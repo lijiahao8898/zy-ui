@@ -275,6 +275,15 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- 验证码输入框 -->
+                <div class="category-instance__example" v-show="currentCategory === 11">
+                    <div class="example-component">
+                        <div class="example-component__item" style="position: relative;width: calc(100vw - 480px);">
+                            <zy-verify-box></zy-verify-box>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -303,7 +312,8 @@ export default {
                 {label: '步骤'},
                 {label: '自定义五角星'},
                 {label: '瀑布流'},
-                {label: '关系图'}
+                {label: '关系图'},
+                {label: '验证码输入框'},
             ],
             waterfallItemWidth: 200,
             waterfallList: [
@@ -679,21 +689,23 @@ export default {
     display: flex;
 
     .category {
-        width: 230px;
+        width: 220px;
         background: #fff;
-        padding: 20px 0;
+        padding: 15px 0;
 
         &-title {
-            font-size: 18px;
-            padding: 20px;
+            font-size: 16px;
+            height: 45px;
+            line-height: 45px;
             border-bottom: 1px solid #f8f8f8;
             cursor: pointer;
-            transition: background .3s;
+            transition: background, font-size .3s;
 
             &:hover,&.active {
                 background: #f8f8f8;
                 font-weight: bold;
                 letter-spacing: 1px;
+                font-size: 18px;
             }
         }
     }

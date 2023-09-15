@@ -7,10 +7,11 @@ import InsuranceSelect from "./insuranceSelect";
 import Flip from './flip';
 import CountUpSlide from './countUpSlide';
 import CircleScroll from './circleScroll';
-import TextRain from './textRain'
-import Step from './step'
-import Waterfall from './waterfall'
-import Relation from './Relation'
+import TextRain from './textRain';
+import Step from './step';
+import Waterfall from './waterfall';
+import Relation from './Relation';
+import VerifyBox from "./verifyBox";
 // import ele from './ele/index'
 
 const components = [
@@ -26,7 +27,8 @@ const components = [
     TextRain,
     Step,
     Waterfall,
-    Relation
+    Relation,
+    VerifyBox
 ]
 
 const install = (Vue) => {

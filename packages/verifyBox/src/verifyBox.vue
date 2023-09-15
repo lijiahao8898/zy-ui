@@ -14,6 +14,7 @@
 
 <script>
 export default {
+    name: 'zy-verify-box',
     data () {
         return {
             simpleInput1: ''
