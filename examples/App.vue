@@ -284,6 +284,15 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- 验证码输入框 -->
+                <div class="category-instance__example" v-show="currentCategory === 12">
+                    <div class="example-component">
+                        <div class="example-component__item" style="position: relative;width: calc(100vw - 480px);">
+                            <zy-image-compare></zy-image-compare>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -314,6 +323,7 @@ export default {
                 {label: '瀑布流'},
                 {label: '关系图'},
                 {label: '验证码输入框'},
+                {label: '图片对比'},
             ],
             waterfallItemWidth: 200,
             waterfallList: [

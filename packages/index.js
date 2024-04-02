@@ -12,6 +12,7 @@ import Step from './step';
 import Waterfall from './waterfall';
 import Relation from './Relation';
 import VerifyBox from "./verifyBox";
+import ImageCompare from './imageCompare'
 // import ele from './ele/index'
 
 const components = [
@@ -28,7 +29,8 @@ const components = [
     Step,
     Waterfall,
     Relation,
-    VerifyBox
+    VerifyBox,
+    ImageCompare
 ]
 
 const install = (Vue) => {
