@@ -1,14 +1,11 @@
 <template>
-    <div>
-<!--        {{numSplitArr}}-->
-        <div class="flip-wrapper">
-            <!-- 翻牌的外框 -->
-            <div class="flip down" :class="{go: item.go}" v-for="(item, index) in numSplitArr" :key="index">
-                <!-- 位于前面的纸牌 -->
-                <div class="digital front" :class="'number' + getBeforeNum(index)"></div>
-                <!-- 位于后面的纸牌 -->
-                <div class="digital back" :class="'number' + (numArr.includes(item.num) ? item.num : '')"></div>
-            </div>
+    <div class="flip-wrapper">
+        <!-- 翻牌的外框 -->
+        <div class="flip down" :class="{go: item.go}" v-for="(item, index) in numSplitArr" :key="index">
+            <!-- 位于前面的纸牌 -->
+            <div class="digital front" :class="'number' + getBeforeNum(index)"></div>
+            <!-- 位于后面的纸牌 -->
+            <div class="digital back" :class="'number' + (numArr.includes(item.num) ? item.num : '')"></div>
         </div>
     </div>
 </template>
@@ -25,7 +22,7 @@ export default {
             type: Number
         },
         target: {
-            default: 515.50,
+            default: 515.501,
             type: Number
         },
         timer: {
@@ -92,7 +89,7 @@ export default {
         add() {
             this.num = (this.num + this.numberSplit > this.target ? this.target : this.num + this.numberSplit);
             let numSplitArr = this.num.toString().split('');
-            console.log(numSplitArr)
+            // console.log(numSplitArr)
             if(numSplitArr.length > this.numSplitArr.length) {
                 let between = numSplitArr.length - this.numSplitArr.length;
                 for(let i = 0; i < between; i ++) {

@@ -8,7 +8,12 @@
             <span :class="simpleInput1.length > 4?'highlight':''">{{simpleInput1.slice(4,5)}}</span>
             <span :class="simpleInput1.length > 5?'highlight':''">{{simpleInput1.slice(5,6)}}</span>
         </label>
-        <input id="simpleInput1" v-model="simpleInput1" maxlength="6" type="text" placeholder="请输⼊六位数字验证码" />
+        <input id="simpleInput1"
+               v-model="simpleInput1"
+               maxlength="6"
+               type="text"
+               autocomplete="off"
+               placeholder="请输⼊六位数字验证码" />
     </div>
 </template>
 
@@ -32,12 +37,21 @@ export default {
 </script>
 
 <style>
-#simpleInput1 {
+.input-box {
+    position: relative;
+}
 
+#simpleInput1 {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
 }
 
 .simple-input-content {
     display: flex;
+    background: #fff;
 }
 
 .simple-input-content span {

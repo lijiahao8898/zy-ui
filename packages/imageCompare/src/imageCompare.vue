@@ -39,8 +39,8 @@ export default {
     name: 'zy-image-compare',
     data() {
         return {
-            width: '1600',
-            height: '700',
+            width: '1100',
+            height: '600',
             isDown: false,     // 鼠标是否按住
             moveX: 0,          // 鼠标移动的位置
             x: this.width / 2, // 设置位置

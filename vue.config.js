@@ -12,7 +12,7 @@ const resolve = (dir) => path.join(__dirname, '../', dir)
 
 console.log(entries);
 
-console.log(`-----------${JSON.stringify(process.env)}---------------`)
+console.log(`---------------------------`)
 
 if(process.env.NODE_ENV === 'production') {
     module.exports = {
