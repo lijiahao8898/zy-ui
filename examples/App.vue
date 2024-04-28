@@ -33,6 +33,7 @@ import ExampleCompare from './components/compare'
 import ExampleRelation from './components/relation'
 import ExampleVerify from './components/verify'
 import ExampleWaterfall from './components/waterfall'
+import ExampleAnimate from './components/animate'
 
 export default {
     name: 'App',
@@ -49,7 +50,8 @@ export default {
         ExampleShape,
         ExampleWaterfall,
         ExampleRelation,
-        ExampleVerify
+        ExampleVerify,
+        ExampleAnimate
     },
     data() {
         return {
@@ -69,6 +71,7 @@ export default {
                 {label: '关系图', value: 'ExampleRelation'},
                 {label: '验证码输入框', value: 'ExampleVerify'},
                 {label: '图片对比', value: 'ExampleCompare'},
+                {label: '动画', value: 'ExampleAnimate'},
             ],
         }
     },
@@ -144,11 +147,28 @@ export default {
 
 .example-component {
     border-radius: 4px;
-    padding: 40px;
+    padding: 30px;
+
+    &.flex {
+        display: flex;
+    }
+;
 }
 
 .example-component__item {
     //background: #fff; display: flex; flex-wrap: wrap;
+}
+
+.example-component__card {
+    transition: all .3s;
+    border-radius: 4px;
+    background: #F1F8FF;
+    padding: 20px;
+    width: 20%;
+}
+
+.example-component__card:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .example-component__item .item {

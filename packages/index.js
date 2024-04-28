@@ -13,6 +13,7 @@ import Waterfall from './waterfall';
 import Relation from './Relation';
 import VerifyBox from "./verifyBox";
 import ImageCompare from './imageCompare'
+import Voice from "./animate";
 // import ele from './ele/index'
 
 const components = [
@@ -30,7 +31,8 @@ const components = [
     Waterfall,
     Relation,
     VerifyBox,
-    ImageCompare
+    ImageCompare,
+    Voice
 ]
 
 const install = (Vue) => {
