@@ -14,7 +14,8 @@ import Relation from './Relation';
 import VerifyBox from "./verifyBox";
 import ImageCompare from './imageCompare'
 import Voice from "./animate";
-// import ele from './ele/index'
+import ele from './ele/index'
+import zyElmUpload from './elm/upload'
 
 const components = [
     Item,
@@ -32,7 +33,8 @@ const components = [
     Relation,
     VerifyBox,
     ImageCompare,
-    Voice
+    Voice,
+    zyElmUpload
 ]
 
 const install = (Vue) => {
@@ -41,7 +43,7 @@ const install = (Vue) => {
     components.map(component => {
         Vue.component(component.name, component)
     })
-    // Vue.use(ele)
+    Vue.use(ele)
 }
 
 if (typeof window !== 'undefined' && window.Vue) {

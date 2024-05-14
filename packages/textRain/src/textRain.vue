@@ -7,6 +7,12 @@
 <script>
 export default {
     name: 'zy-text-rain',
+    props: {
+        height: {
+            type: [Number, String],
+            default: 200
+        }
+    },
     data () {
         return {}
     },
@@ -14,7 +20,7 @@ export default {
         this.$nextTick(() => {
             const canvas = document.getElementById('textRainCanvas');
             const width = this.$refs.textRainWrapper.offsetWidth;
-            const height = 200;
+            const height = this.height;
             const ctx = canvas.getContext('2d');
             canvas.width = width;
             canvas.height = height;
@@ -26,11 +32,11 @@ export default {
             const columnNextIndexes = new Array(columnCount);
             // columnNextIndexes.fill(Math.floor(height / 20) + 2)
             columnNextIndexes.fill(1)
-            console.log(columnNextIndexes)
+            // console.log(columnNextIndexes)
 
             let timer = setInterval(() => {
                 this.draw(ctx, columnCount, columnWidth, columnNextIndexes, width, height);
-                console.log(1);
+                // console.log(1);
             }, 40)
 
             this.$once('hook:beforeDestroy',()=>{

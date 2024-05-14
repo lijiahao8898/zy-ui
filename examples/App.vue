@@ -2,12 +2,21 @@
     <div id="app">
         <div class="app-wrapper">
             <div class="category">
-                <div class="category-title"
+                <div class="category-sub"
                      v-for="(item, index) in categoryList"
                      :key="index"
-                     :class="{active: currentCategory === index}"
-                     @click="toggleHandler(index, item)"
-                >{{ item.label }}
+                     :class="{active: currentCategory === `${index}`}"
+                     @click="toggleHandler(`${index}`, item)"
+                >
+                    <div class="category-sub__title">{{item.label}}</div>
+                    <div class="category-title"
+                         v-for="(sub, subIndex) in item.child"
+                         :key="subIndex"
+                         :class="{active: currentCategory === `${index}-${subIndex}`}"
+                         @click.stop="toggleHandler(`${index}-${subIndex}`, item)"
+                    >
+                        {{ sub.label }}
+                    </div>
                 </div>
             </div>
             <div class="category-instance">
@@ -34,6 +43,7 @@ import ExampleRelation from './components/relation'
 import ExampleVerify from './components/verify'
 import ExampleWaterfall from './components/waterfall'
 import ExampleAnimate from './components/animate'
+import ExampleElm from './components/elElement'
 
 export default {
     name: 'App',
@@ -51,7 +61,8 @@ export default {
         ExampleWaterfall,
         ExampleRelation,
         ExampleVerify,
-        ExampleAnimate
+        ExampleAnimate,
+        ExampleElm,
     },
     data() {
         return {
@@ -59,12 +70,21 @@ export default {
             currentCategory: 1,
             categoryList: [
                 {label: '条目', value: 'Basic'},
-                {label: '进度条', value: 'ExampleProgress'},
+                {label: '进度条 - progress', value: 'ExampleProgress'},
                 {label: '推荐度', value: 'ExampleScore'},
-                {label: '选择保险公司', value: 'ExampleSelect'},
+                {label: '选择框 - select', value: 'ExampleSelect'},
                 {label: '翻牌', value: 'ExampleFlip'},
                 {label: '圆形滚动', value: 'ExampleScroll'},
-                {label: '文字雨特效', value: 'ExampleTextRain'},
+                {
+                    label: '特效',
+                    value: 'ExampleTextRain',
+                    child: [
+                        {
+                            label: '文字雨特效',
+                            value: 'ExampleTextRain'
+                        },
+                    ]
+                },
                 {label: '步骤', value: 'ExampleStep'},
                 {label: '自定义五角星', value: 'ExampleShape'},
                 {label: '瀑布流', value: 'ExampleWaterfall'},
@@ -72,6 +92,7 @@ export default {
                 {label: '验证码输入框', value: 'ExampleVerify'},
                 {label: '图片对比', value: 'ExampleCompare'},
                 {label: '动画', value: 'ExampleAnimate'},
+                {label: 'elementUI', value: 'ExampleElm'},
             ],
         }
     },
@@ -85,6 +106,14 @@ export default {
 </script>
 
 <style lang="scss">
+
+:root {
+    --theme-bg-color: rgba(16 18 27 / 40%);
+    --theme-color: #f9fafb;
+    --border-color: rgba(113 119 144 / 25%);
+    --inactive-color: rgb(113 119 144 / 78%);
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -95,42 +124,66 @@ export default {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;
     min-height: 100vh;
     display: flex;
     flex-wrap: wrap;
-    background: #f8f8f8;
+    background-image: url("./assets/images/macos-big-sur-1280x720-dark-wwdc-2020-22655.jpg");
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 .app-wrapper {
     display: flex;
+    background: var(--theme-bg-color);
+    backdrop-filter: blur(20px);
+    margin: 20px;
+    border-radius: 14px;
 
     .category {
         width: 220px;
-        background: #fff;
         padding: 15px 0;
+        overflow-y: auto;
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        border-right: 1px solid var(--border-color);
 
         &-instance {
-            background: #fff;
             margin: 20px;
-            min-width: calc(100vw - 260px);
+            min-width: calc(100vw - 300px);
+        }
+
+        &-sub {
+            &__title {
+                font-size: 14px;
+                line-height: 45px;
+                cursor: pointer;
+                color: var(--inactive-color);
+                transition: background, font-size .3s;
+                text-align: left;
+                text-indent: 50px;
+
+                &:hover,&.active {
+                    font-weight: bold;
+                    font-size: 16px;
+                    color: var(--theme-color);
+                }
+            }
         }
 
         &-title {
             font-size: 16px;
-            height: 45px;
-            line-height: 45px;
-            border-bottom: 1px solid #f8f8f8;
+            height: 40px;
+            line-height: 40px;
             cursor: pointer;
             transition: background, font-size .3s;
+            text-align: left;
+            text-indent: 50px;
+            color: var(--theme-color);
 
             &:hover,&.active {
-                background: #f8f8f8;
+                background: rgba(16, 18, 27, 0.4);
                 font-weight: bold;
-                letter-spacing: 1px;
-                font-size: 18px;
-                box-shadow: 1px 0 5px rgba(0, 0, 0, 0.1) inset;
+                font-size: 16px;
+                box-shadow: 1px 0 5px rgba(255, 255, 255, 0.2) inset;
             }
         }
     }
@@ -152,7 +205,18 @@ export default {
     &.flex {
         display: flex;
     }
-;
+}
+
+.example-title {
+    font-size: 40px;
+    padding-top: 40px;
+    font-weight: bold;
+    color: var(--theme-color);
+
+    span {
+        font-size: 14px;
+        margin-left: 20px;
+    }
 }
 
 .example-component__item {
@@ -165,6 +229,23 @@ export default {
     background: #F1F8FF;
     padding: 20px;
     width: 20%;
+    margin: 0 10px 10px 0;
+
+    .item {
+        margin-bottom: 15px;
+    }
+}
+
+.example-component__card .example-component__card__title {
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.example-component__title {
+    font-size: 28px;
+    font-weight: bold;
+    line-height: 1.2;
+    margin-bottom: 20px;
 }
 
 .example-component__card:hover {
