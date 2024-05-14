@@ -1,26 +1,28 @@
 <template>
     <div id="app">
         <div class="app-wrapper">
-            <div class="category">
-                <div class="category-sub"
-                     v-for="(item, index) in categoryList"
-                     :key="index"
-                     :class="{active: currentCategory === `${index}`}"
-                     @click="toggleHandler(`${index}`, item)"
-                >
-                    <div class="category-sub__title">{{item.label}}</div>
-                    <div class="category-title"
-                         v-for="(sub, subIndex) in item.child"
-                         :key="subIndex"
-                         :class="{active: currentCategory === `${index}-${subIndex}`}"
-                         @click.stop="toggleHandler(`${index}-${subIndex}`, item)"
+            <div class="app-wrapper__container">
+                <div class="category">
+                    <div class="category-sub"
+                         v-for="(item, index) in categoryList"
+                         :key="index"
+                         :class="{active: currentCategory === `${index}`}"
+                         @click="toggleHandler(`${index}`, item)"
                     >
-                        {{ sub.label }}
+                        <div class="category-sub__title">{{item.label}}</div>
+                        <div class="category-title"
+                             v-for="(sub, subIndex) in item.child"
+                             :key="subIndex"
+                             :class="{active: currentCategory === `${index}-${subIndex}`}"
+                             @click.stop="toggleHandler(`${index}-${subIndex}`, item)"
+                        >
+                            {{ sub.label }}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="category-instance">
-                <component :is="currentComponent"></component>
+                <div class="category-instance">
+                    <component :is="currentComponent"></component>
+                </div>
             </div>
         </div>
 
@@ -125,19 +127,19 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     min-height: 100vh;
-    display: flex;
-    flex-wrap: wrap;
     background-image: url("./assets/images/macos-big-sur-1280x720-dark-wwdc-2020-22655.jpg");
     background-size: cover;
     background-attachment: fixed;
 }
 
 .app-wrapper {
-    display: flex;
-    background: var(--theme-bg-color);
-    backdrop-filter: blur(20px);
-    margin: 20px;
-    border-radius: 14px;
+
+    &__container {
+        background: var(--theme-bg-color);
+        backdrop-filter: blur(20px);
+        border-radius: 14px;
+        display: flex;
+    }
 
     .category {
         width: 220px;

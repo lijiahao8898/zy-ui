@@ -70,15 +70,19 @@ export default {
     methods: {
         mousemoveHandler() {
             let target = {}
-            if (!this.$refs.insuranceSelect.getBoundingClientRect) {
+            if (this.$refs.insuranceSelect.getBoundingClientRect) {
+                // 这个属性频繁计算会引发页面的重绘，可能会对页面的性能造成影响。
                 target = this.$refs.insuranceSelect.getBoundingClientRect();
             } else {
                 let [top, left] = this.getAbsPosition(this.$refs.insuranceSelect);
                 target.left = left
                 target.top = top
             }
-            this.$refs.listWrapper.style.left = target.left + 'px'
-            this.$refs.listWrapper.style.top = (target.top + 60) + 'px'
+            const scrollLeft =  document.documentElement.scrollLeft
+            const scrollTop =  document.documentElement.scrollTop
+            this.$refs.listWrapper.style.left = target.left + scrollLeft + 'px'
+            this.$refs.listWrapper.style.top = (target.top + 60) + scrollTop + 'px'
+            this.$refs.listWrapper.style.width = target.width + 'px'
         },
         getAbsPosition(el) {
             let el2 = el;
@@ -133,7 +137,7 @@ export default {
 
 <style lang="scss" scoped>
 .insurance-select {
-    width: 280px;
+    //width: 280px;
     height: 50px;
     background: #FFFFFF;
     box-shadow: 0 2px 4px 0 rgba(204, 204, 204, 0.5);
