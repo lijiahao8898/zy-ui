@@ -16,6 +16,7 @@ import ImageCompare from './imageCompare'
 import Voice from "./animate";
 import ele from './ele/index'
 import zyElmUpload from './elm/upload'
+import tableEl from './tableEl/src/tableEl.vue'
 
 const components = [
     Item,
@@ -34,7 +35,8 @@ const components = [
     VerifyBox,
     ImageCompare,
     Voice,
-    zyElmUpload
+    zyElmUpload,
+    tableEl
 ]
 
 const install = (Vue) => {

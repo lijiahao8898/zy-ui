@@ -46,6 +46,7 @@ import ExampleVerify from './components/verify'
 import ExampleWaterfall from './components/waterfall'
 import ExampleAnimate from './components/animate'
 import ExampleElm from './components/elElement'
+import ExampleTable from './components/tableEl.vue'
 
 export default {
     name: 'App',
@@ -65,6 +66,7 @@ export default {
         ExampleVerify,
         ExampleAnimate,
         ExampleElm,
+        ExampleTable,
     },
     data() {
         return {
@@ -95,6 +97,7 @@ export default {
                 {label: '图片对比', value: 'ExampleCompare'},
                 {label: '动画', value: 'ExampleAnimate'},
                 {label: 'elementUI', value: 'ExampleElm'},
+                {label: '表格', value: 'ExampleTable'},
             ],
         }
     },
