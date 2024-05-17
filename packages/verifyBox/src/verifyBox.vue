@@ -51,13 +51,13 @@ export default {
 
 .simple-input-content {
     display: flex;
-    background: #fff;
+    /*background: #fff;*/
 }
 
 .simple-input-content span {
     width: 80px;
     height: 80px;
-    background: #ccc;
+    border: 2px solid #ccc;
     color: #fff;
     line-height: 80px;
     margin-right: 20px;

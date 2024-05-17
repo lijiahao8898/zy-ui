@@ -1,28 +1,26 @@
 <template>
     <div id="app">
         <div class="app-wrapper">
-            <div class="app-wrapper__container">
-                <div class="category">
-                    <div class="category-sub"
-                         v-for="(item, index) in categoryList"
-                         :key="index"
-                         :class="{active: currentCategory === `${index}`}"
-                         @click="toggleHandler(`${index}`, item)"
+            <div class="category">
+                <div class="category-sub"
+                     v-for="(item, index) in categoryList"
+                     :key="index"
+                     :class="{active: currentCategory === `${index}`}"
+                     @click="toggleHandler(`${index}`, item)"
+                >
+                    <div class="category-sub__title">{{ item.label }}</div>
+                    <div class="category-title"
+                         v-for="(sub, subIndex) in item.child"
+                         :key="subIndex"
+                         :class="{active: currentCategory === `${index}-${subIndex}`}"
+                         @click.stop="toggleHandler(`${index}-${subIndex}`, item)"
                     >
-                        <div class="category-sub__title">{{item.label}}</div>
-                        <div class="category-title"
-                             v-for="(sub, subIndex) in item.child"
-                             :key="subIndex"
-                             :class="{active: currentCategory === `${index}-${subIndex}`}"
-                             @click.stop="toggleHandler(`${index}-${subIndex}`, item)"
-                        >
-                            {{ sub.label }}
-                        </div>
+                        {{ sub.label }}
                     </div>
                 </div>
-                <div class="category-instance">
-                    <component :is="currentComponent"></component>
-                </div>
+            </div>
+            <div class="category-instance">
+                <component :is="currentComponent"></component>
             </div>
         </div>
 
@@ -98,10 +96,35 @@ export default {
             ],
         }
     },
+    mounted() {
+        console.log(this.getUrlParams())
+        this.currentCategory = this.getUrlParams().cur
+        if(this.currentCategory.indexOf('-') !== -1) {
+            let [a, b] = this.currentCategory.split('-')
+            this.currentComponent = this.categoryList[a].child[b].value
+        } else {
+            this.currentComponent = this.categoryList[this.currentCategory].value
+        }
+    },
     methods: {
+        getUrlParams:function(){
+            var args=new Object();
+            var query=location.search.substring(1);//获取查询串
+            var pairs=query.split("&");//在逗号处断开
+            for(var i=0;i<pairs.length;i++)
+            {
+                var pos=pairs[i].indexOf('=');//查找name=value
+                if(pos==-1) continue;//如果没有找到就跳过
+                var argname=pairs[i].substring(0,pos);//提取name
+                var value=pairs[i].substring(pos+1);//提取value
+                args[argname]=unescape(value);//存为属性
+            }
+            return args;
+        },
         toggleHandler(index, {value}) {
             this.currentCategory = index;
             this.currentComponent = value;
+            history.replaceState('', '',`${window.location.origin}?cur=${this.currentCategory}`)
         },
     }
 }
@@ -130,16 +153,14 @@ export default {
     background-image: url("./assets/images/macos-big-sur-1280x720-dark-wwdc-2020-22655.jpg");
     background-size: cover;
     background-attachment: fixed;
+    padding: 20px;
 }
 
 .app-wrapper {
-
-    &__container {
-        background: var(--theme-bg-color);
-        backdrop-filter: blur(20px);
-        border-radius: 14px;
-        display: flex;
-    }
+    background: var(--theme-bg-color);
+    backdrop-filter: blur(20px);
+    border-radius: 14px;
+    display: flex;
 
     .category {
         width: 220px;
@@ -163,7 +184,7 @@ export default {
                 text-align: left;
                 text-indent: 50px;
 
-                &:hover,&.active {
+                &:hover, &.active {
                     font-weight: bold;
                     font-size: 16px;
                     color: var(--theme-color);
@@ -181,7 +202,7 @@ export default {
             text-indent: 50px;
             color: var(--theme-color);
 
-            &:hover,&.active {
+            &:hover, &.active {
                 background: rgba(16, 18, 27, 0.4);
                 font-weight: bold;
                 font-size: 16px;

@@ -30,8 +30,8 @@ export default {
             const columnCount = Math.floor(width / columnWidth)
             // 记录每列写到了第几个文字 初始[1,1,1,1....]
             const columnNextIndexes = new Array(columnCount);
-            // columnNextIndexes.fill(Math.floor(height / 20) + 2)
-            columnNextIndexes.fill(1)
+            columnNextIndexes.fill(Math.floor(height / 20) + 2)
+            // columnNextIndexes.fill(1)
             // console.log(columnNextIndexes)
 
             let timer = setInterval(() => {
@@ -47,8 +47,8 @@ export default {
     },
     methods: {
         draw(ctx, columnCount, columnWidth, columnNextIndexes, w, h) {
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.1'
-            ctx.fillRect(0, 0, w, h)
+            // ctx.fillStyle = 'rgba(255, 255, 255, 0.1'
+            // ctx.fillRect(0, 0, w, h)
             let fz = 20;
             ctx.fillStyle = this.getRandomColor();
             ctx.font = `${fz}px "Roboto Mono"`
@@ -57,10 +57,10 @@ export default {
                 let y = fz * columnNextIndexes[i]
                 ctx.fillText(this.getRandomChar(), x, y)
                 if (y > h && Math.random() > 0.99) {
-                    // ctx.clearRect(x, 0, 20, y)
+                    ctx.clearRect(x, 0, 20, y)
                     columnNextIndexes[i] = 0;
                 } else {
-                    // ctx.clearRect(x, y - 400, 20, 20)
+                    ctx.clearRect(x, y - 400, 20, 20)
                     columnNextIndexes[i]++;
                 }
             }
