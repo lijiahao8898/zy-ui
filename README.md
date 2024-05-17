@@ -10,7 +10,7 @@ npm install
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Compiles for production
 ```
 npm run build
 ```
@@ -22,7 +22,7 @@ npm run lint
 
 ### build lib to publish npm
 ```
-npm run lib
+npm run build && npm publish
 ```
 
 ## 如何使用
@@ -30,7 +30,7 @@ npm run lib
 npm install zy-libraries --save
 
 import zyLibraries from 'zy-libraries';
-import 'zy-libraries/lib/zy-libraries.css'
+import 'zy-libraries/lib/entry/style.css
 
 Vue.use(zyLibraries)
 
@@ -38,6 +38,25 @@ Vue.use(zyLibraries)
 ```
 
 ## 按需加载的引入
+
+安装 `babel-plugin-component` 并创建 `.babelrc` 进行如下配置：
+```javascript
+{
+    "plugins": [
+        [
+            "component",
+            {
+                "libraryName": "zy-libraries"
+            }
+        ]
+    ]
+}
+```
+在 `*.vue` 中：
+```javascript
+import {zyItem} from 'zy-libraries'
+```
+
 `babel-plugin-component` 会将引入的代码进行转换，vue-cli3 请使用 `babel-plugin-import`
 
 ```js
