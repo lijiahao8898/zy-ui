@@ -20,6 +20,9 @@ if(process.env.NODE_ENV === 'production') {
         productionSourceMap: false,
         configureWebpack: {
             entry: entries,
+            optimization: {
+                minimize: false
+            },
             output: {
                 filename: '[name]/index.js',
                 // libraryTarget: 'commonjs2',
