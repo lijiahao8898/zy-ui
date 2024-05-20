@@ -7,5 +7,6 @@
   "zy-insurance-select": "./packages/insuranceSelect/index.js",
   "zy-flip": "./packages/flip/index.js",
   "zy-count-up-slide": "./packages/countUpSlide/index.js",
-  "zy-circle-scroll": "./packages/circleScroll/index.js"
+  "zy-circle-scroll": "./packages/circleScroll/index.js",
+  "zy-table": "./packages/tableEl/index.js"
 }
