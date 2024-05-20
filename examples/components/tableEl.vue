@@ -1,8 +1,10 @@
 <template>
     <div class="wrap">
-        <zy-table :column="columnData" :table-data="tableData" :table-loading="tableLoading" :isSelection="true" :handleSelectionChange="handleSelectionChange" :pageInfo="pageInfo" :handleCurrentChange="handleCurrentChange">
+        <zy-table :column="columnData" :table-data="tableData" :table-loading="tableLoading" :isSelection="true"
+            :handleSelectionChange="handleSelectionChange" :pageInfo="pageInfo"
+            :handleCurrentChange="handleCurrentChange" :isHavePages="isHavePages" :headerCellStyles="headerCellStyles" :isStripe="isStripe">
             <div slot="protocolSlot" slot-scope="scope">
-                <div>这是一个protocolSlot内容{{ 1||scope }}</div>
+                <div>这是一个protocolSlot内容{{ 1 || scope }}</div>
             </div>
             <div slot="theadHeaderSlot1" slot-scope="scope">
                 <div>表头{{ scope }}</div>
@@ -11,8 +13,10 @@
                 <div @click="tableSlotMed(scope.row)">表格tableSlot{{ scope.index }}</div>
             </div>
             <div slot="newSlot" slot-scope="scope">
-                <div @click="tableSlotMed(scope.row.name)">newSlot{{ scope.index}}</div>
+                <div @click="tableSlotMed(scope.row.name)">newSlot{{ scope.index }}</div>
             </div>
+            <!-- 底部插槽 -->
+            <div slot="pageLeft">1111</div>
         </zy-table>
     </div>
 </template>
@@ -20,9 +24,14 @@
 export default {
     data() {
         return {
-            pageInfo:{
-                total:25,
-                size:10,
+            isHavePages:true,// 是否有分页
+            isStripe:true,
+            headerCellStyles: {
+                background: '#FAFAFA', color: '#2B2E36'
+            },
+            pageInfo: {
+                total: 25,
+                size: 10,
             },
             tableLoading: false,
             columnData: [
@@ -30,8 +39,9 @@ export default {
                     type: '',
                     label: '',
                     prop: '',
-                    dataType: 'slot', //  类型   slot 时有列表插槽  progress  进度条  tag 标签 
+                    dataType: 'slot', //  类型   slot 时有列表插槽  progress  进度条  tag 标签  不写时是默认值
                     slot: 'tableSlot', // 列表插槽 名
+
                     theadDataType: 'theadSlot',    // theadSlot  表头 有插槽 
                     theadSlot: 'theadHeaderSlot1'    // 表头  插槽名
                 },
@@ -39,7 +49,7 @@ export default {
                     type: '',
                     label: '默认值',
                     prop: 'name',
-                    dataType:"", // 默认值
+                    dataType: "", // 默认值
 
                 },
                 {
@@ -51,20 +61,36 @@ export default {
                     dataType: 'tag', // 标签
                     label: '标签',
                     prop: 'tab',
-                    
+                    minWidth: 120,
+                    tagGroup: {
+                        // tag 显示哪个字段
+                        label: 'name',
+                    },
+                    formatType: (e) => {
+                        // 返回 tag 类型
+                        if (e) {
+                            return e.type || 'warning'
+                        } else {
+                            return 'warning'
+                        }
+                    },
+                    formatData: (e) => {
+                        return e
+                    },
+
                 },
                 {
-                    dataType: 'slot', 
+                    dataType: 'slot',
                     slot: 'newSlot',
                     label: 'newSlot1',
                     prop: 'newSlot1',
                 },
                 {
-                    dataType: 'option', 
+                    dataType: 'option',
                     // slot: 'newSlot',
                     label: 'newSlot2',
                     prop: 'newSlot2',
-                    operation:[
+                    operation: [
                         {
                             name: '编辑',
                             type: 'text',
@@ -72,13 +98,13 @@ export default {
                             // icon: 'el-icon-edit',
                             plain: false,
                             showHide: (row) => {
-                                console.log(1||row);
+                                console.log(1 || row);
                                 // 是否显示
                                 return true
                             },
                             clickFun: (row) => {
                                 // 触发方法
-                                console.log(2||row);
+                                console.log(2 || row);
                             }
                         },
                     ],
@@ -88,6 +114,7 @@ export default {
                     label: '启用状态',
                     prop: 'is_active',
                     formatData: (item) => {
+                        // 处理展示文本
                         const str = item == true ? '已启用' : '未启用'
                         return str
                     }
@@ -111,13 +138,13 @@ export default {
                             icon: 'el-icon-edit',
                             plain: true,
                             showHide: (row) => {
-                                console.log(1||row);
+                                console.log(1 || row);
                                 // 是否显示
                                 return true
                             },
                             clickFun: (row) => {
                                 // 触发方法
-                                console.log(2||row);
+                                console.log(2 || row);
                             }
                         },
                         {
@@ -125,13 +152,13 @@ export default {
                             type: 'danger',
                             size: 'mini',
                             showHide: (row) => {
-                                console.log(3||row);
+                                console.log(3 || row);
                                 return true
                             },
                             icon: 'el-icon-delete',
                             plain: true,
                             clickFun: (row) => {
-                                console.log(4||row);
+                                console.log(4 || row);
                             }
                         }
 
@@ -141,29 +168,37 @@ export default {
             ],
 
             //表格数据
-            tableData: [{ name: 111, is_active: true, protocol: 'TCP',progress:10,tab:[1,2,3] },
-            { name: 111, is_active: true, protocol: 'TCP',progress:10 },
-            { name: 111, is_active: true, protocol: 'TCP',type:1,flag:1},
-            { name: 111, is_active: true, protocol: 'TCP'},
-            { name: 111, is_active: true, protocol: 'TCP'},
-            { name: 111, is_active: true, protocol: 'TCP'},
-            { name: 111, is_active: true, protocol: 'TCP'},
-            { name: 111, is_active: true, protocol: 'TCP'},
-            { name: 111, is_active: true, protocol: 'TCP'},
-            { name: 111, is_active: true, protocol: 'TCP'},
-        ],
+            tableData: [{ name: 111, is_active: true, protocol: 'TCP', progress: 10, tab: [1, 2, 3] },
+            {
+                name: 111, is_active: true, protocol: 'TCP', progress: 10, tab: [
+                    { name: '标签一', type: '', color: "#0f0", textColor: '#000' },
+                    { name: '标签二', type: 'success' },
+                    { name: '标签三', type: 'info' },
+                    { name: '标签四', type: 'warning' },
+                    { name: '标签五', type: 'danger' }
+                ]
+            },
+            { name: 111, is_active: true, protocol: 'TCP', type: 1, flag: 1 },
+            { name: 111, is_active: true, protocol: 'TCP' },
+            { name: 111, is_active: true, protocol: 'TCP' },
+            { name: 111, is_active: true, protocol: 'TCP' },
+            { name: 111, is_active: true, protocol: 'TCP' },
+            { name: 111, is_active: true, protocol: 'TCP' },
+            { name: 111, is_active: true, protocol: 'TCP' },
+            { name: 111, is_active: true, protocol: 'TCP' },
+            ],
         }
     },
     mounted() {
     },
-    methods:{
-        handleSelectionChange(e){
-            console.log(e,123);
+    methods: {
+        handleSelectionChange(e) {
+            console.log(e, 123);
         },
-        handleCurrentChange(e){
-            console.log(e,456);
+        handleCurrentChange(e) {
+            console.log(e, 456);
         },
-        tableSlotMed(_row){
+        tableSlotMed(_row) {
             console.log(_row);
         },
     }

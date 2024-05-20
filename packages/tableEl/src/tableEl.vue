@@ -2,8 +2,11 @@
     <div class="table-wrap ">
         <el-table  ref="multipleTable" v-loading="tableLoading" :data="tableData" element-loading-text="拼命加载中"
             :height="height" element-loading-spinner="el-icon-loading"
-            element-loading-background="rgba(20, 60, 133, 0.8)" tooltip-effect="dark" style="width: 100%; border-collapse: collapse; border-top: none; border-left: none;" border
-            :row-class-name="rowClassName" :header-cell-style="{ background: '#FAFAFA', color: '#2B2E36' }" stripe
+            :element-loading-background="loadingColor" tooltip-effect="dark" style="width: 100%; border-collapse: collapse; border-top: none; border-left: none;" border
+            :row-class-name="rowClassName" 
+            :header-cell-style="headerCellStyles" 
+
+            :stripe="isStripe"
             @selection-change="handleSelectionChange">
             <template v-if="isSelection" >
                 <el-table-column type="selection" width="40" align="center" />
@@ -44,7 +47,7 @@
                             <el-tag v-for="(tag, index) in dataTypeFn(scope.row[item.prop], item.formatData)"
                                 v-else-if="typeof dataTypeFn(scope.row[item.prop], item.formatData) == 'object'"
                                 :key="index" :title="scope.row[item.prop] | formatters(item.formatData)"
-                                :type="formatType(tag, item.formatType)">
+                                :type="formatType(tag, item.formatType)" :color=" tag.color" :style="{'color':tag.textColor||''}">
                                 {{ item.tagGroup ? tag[item.tagGroup.label] ? tag[item.tagGroup.label] : tag : tag }}
                             </el-tag>
                             <el-tag v-else :title="scope.row[item.prop] | formatters(item.formatData)"
@@ -78,6 +81,7 @@
 
         </el-table>
         <div class="pagination-container" v-if="isHavePages">
+            <slot name="pageLeft"></slot>
             <el-pagination @current-change="handleCurrentChange" :current-page.sync="pageInfo.currentPage" background
                 :page-size="pageInfo.size" :layout="layout" :total="pageInfo.total">
             </el-pagination>
@@ -106,6 +110,25 @@ export default {
         }
     },
     props: {
+        // loading加载背景色
+        loadingColor:{
+            type: String,
+            default: 'rgba(20, 60, 133, 0.8)'
+        },
+         // 是否栅格布局
+        isStripe:{
+            type: Boolean,
+            default: true
+        },
+        // 表头样式
+        headerCellStyles:{
+            type: Object,
+            default: () => {
+                return {
+                    background: '#FAFAFA', color: '#2B2E36'
+                }
+            }
+        },
         // 是否有序号
         $index:{
             type: Boolean,
@@ -213,7 +236,8 @@ span {
 }
 .pagination-container {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
     padding: 20px;
 }
 .table-wrap {
