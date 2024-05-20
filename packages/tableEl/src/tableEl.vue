@@ -85,7 +85,7 @@
                 <slot name="pageLeft"></slot>
             </div> 
             <el-pagination @current-change="handleCurrentChange" :current-page.sync="pageInfo.currentPage"  @size-change="handleSizeChange" background
-                :page-size="pageInfo.size" :layout="layout" :total="pageInfo.total">
+                :page-size="pageInfo.size" :layout="pageInfo.layout || layout "     :page-sizes="pageInfo.sizes" :total="pageInfo.total">
             </el-pagination>
         </div>
     </div>
@@ -159,13 +159,15 @@ export default {
                     total:0,
                     size:10,
                     currentPage:1,
+                    sizes:[100,200],
+                    layout:'total ,prev, pager, next, jumper,sizes'
                 }
             }
         },
         // 分页layout值
         layout:{
             type: String,
-            default: 'total ,prev, pager, next, jumper'
+            default: 'total ,prev, pager, next, jumper,sizes'
         },
         // 分页方法
         handleCurrentChange:{

@@ -2,7 +2,8 @@
     <div class="wrap">
         <zy-table :column="columnData" :table-data="tableData" :table-loading="tableLoading" :isSelection="true"
             :handleSelectionChange="handleSelectionChange" :pageInfo="pageInfo"
-            :handleCurrentChange="handleCurrentChange" :isHavePages="isHavePages" :headerCellStyles="headerCellStyles" :isStripe="isStripe">
+            :handleCurrentChange="handleCurrentChange" :isHavePages="isHavePages" :headerCellStyles="headerCellStyles"
+            :isStripe="isStripe" :handleSizeChange="handleSizeChange">
             <div slot="protocolSlot" slot-scope="scope">
                 <div>这是一个protocolSlot内容{{ 1 || scope }}</div>
             </div>
@@ -24,14 +25,16 @@
 export default {
     data() {
         return {
-            isHavePages:true,// 是否有分页
-            isStripe:true,
+            isHavePages: true,// 是否有分页
+            isStripe: true,
             headerCellStyles: {
                 background: '#FAFAFA', color: '#2B2E36'
             },
             pageInfo: {
                 total: 25,
                 size: 10,
+                sizes: [1, 2, 3, 4, 5],
+                layout: 'total ,prev, pager, next, jumper,sizes'
             },
             tableLoading: false,
             columnData: [
@@ -198,6 +201,9 @@ export default {
         },
         tableSlotMed(_row) {
             console.log(_row);
+        },
+        handleSizeChange(val) {
+            console.log(val);
         },
     }
 }
