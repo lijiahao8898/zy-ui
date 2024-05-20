@@ -39,10 +39,8 @@ export default {
                     type: '',
                     label: '',
                     prop: '',
-                    dataType: 'slot', //  类型   slot 时有列表插槽  progress  进度条  tag 标签  不写时是默认值
+                    dataType: 'slot', //  类型   dataType为slot时可不写    slot 列表插槽  progress  进度条  tag 标签  不写时是默认值
                     slot: 'tableSlot', // 列表插槽 名
-
-                    theadDataType: 'theadSlot',    // theadSlot  表头 有插槽 
                     theadSlot: 'theadHeaderSlot1'    // 表头  插槽名
                 },
                 {

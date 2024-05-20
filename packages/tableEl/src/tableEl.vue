@@ -1,15 +1,15 @@
 <template>
-    <div class="table-wrap ">
+    <div :class="{'table-wrap':isTableClass} ">
         <el-table  ref="multipleTable" v-loading="tableLoading" :data="tableData" element-loading-text="拼命加载中"
             :height="height" element-loading-spinner="el-icon-loading"
-            :element-loading-background="loadingColor" tooltip-effect="dark" style="width: 100%; border-collapse: collapse; border-top: none; border-left: none;" border
+            :element-loading-background="loadingColor" tooltip-effect="dark" :class="{'tableEl-style' : isTableClass}"  :border="isBorder"
             :row-class-name="rowClassName" 
             :header-cell-style="headerCellStyles" 
 
             :stripe="isStripe"
             @selection-change="handleSelectionChange">
             <template v-if="isSelection" >
-                <el-table-column type="selection" width="40" align="center" />
+                <el-table-column type="selection" width="50" align="center" />
             </template>
             <template v-if="$index">
                 <el-table-column  label="序号" width="55" align="center" >
@@ -25,12 +25,12 @@
                     :column-key="item.columnKey" :filtered-value="item.filteredValue"
                     :filter-multiple="item.filterMultiple" :min-width="item.minWidth" align="center" :key="index">
                     <template slot="header" slot-scope="scope">
-                        <slot v-if="item.theadDataType == 'theadSlot'" :name="item.theadSlot" :row="scope.row" :index="index" />
+                        <slot v-if="item.theadSlot" :name="item.theadSlot" :row="scope.row" :index="index" />
                         <div v-else>{{ item.label }}</div>
                     </template>
                     <template slot-scope="scope">
                         <!-- 插槽 -->
-                        <div v-if="item.dataType == 'slot'">
+                        <div v-if="item.slot || item.dataType == 'slot'">
                             <slot v-if="item.slot" :name="item.slot" :row="scope.row" :index="scope.$index" />
                         </div>
                         <!-- 进度条 -->
@@ -81,8 +81,10 @@
 
         </el-table>
         <div class="pagination-container" v-if="isHavePages">
-            <slot name="pageLeft"></slot>
-            <el-pagination @current-change="handleCurrentChange" :current-page.sync="pageInfo.currentPage" background
+            <div>
+                <slot name="pageLeft"></slot>
+            </div> 
+            <el-pagination @current-change="handleCurrentChange" :current-page.sync="pageInfo.currentPage"  @size-change="handleSizeChange" background
                 :page-size="pageInfo.size" :layout="layout" :total="pageInfo.total">
             </el-pagination>
         </div>
@@ -110,6 +112,16 @@ export default {
         }
     },
     props: {
+        // 是否有边框
+        isTableClass:{
+            type: Boolean,
+            default: true
+        },
+        // 是否有边框
+        isBorder:{
+            type: Boolean,
+            default: true
+        },
         // loading加载背景色
         loadingColor:{
             type: String,
@@ -157,6 +169,13 @@ export default {
         },
         // 分页方法
         handleCurrentChange:{
+            type: Function,
+            default: () => {
+                return () => { }
+            }
+        },
+        // 页码总数改变方法 
+        handleSizeChange:{
             type: Function,
             default: () => {
                 return () => { }
@@ -244,6 +263,9 @@ span {
   background: #FFFFFF;
   border-radius: 4px;
   border: 1px solid #ECECEE;
+}
+.tableEl-style{
+    width: 100%; border-collapse: collapse; border-top: none; border-left: none;
 }
 
 .el-table--border::after, .el-table--group::after{
