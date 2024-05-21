@@ -25,13 +25,13 @@
                     :column-key="item.columnKey" :filtered-value="item.filteredValue"
                     :filter-multiple="item.filterMultiple" :min-width="item.minWidth" align="center" :key="index">
                     <template slot="header" slot-scope="scope">
-                        <slot v-if="item.theadSlot" :name="item.theadSlot" :row="scope.row" :index="index" />
+                        <slot v-if="item.theadSlot" :item="item"  :name="item.theadSlot" :row="scope.row" :index="index" />
                         <div v-else>{{ item.label }}</div>
                     </template>
                     <template slot-scope="scope">
                         <!-- 插槽 -->
                         <div v-if="item.slot || item.dataType == 'slot'">
-                            <slot v-if="item.slot" :name="item.slot" :row="scope.row" :index="scope.$index" />
+                            <slot v-if="item.slot" :item="item" :name="item.slot" :row="scope.row" :index="scope.$index" />
                         </div>
                         <!-- 进度条 -->
                         <div v-else-if="item.dataType == 'progress' && Number(scope.row[item.prop])">
