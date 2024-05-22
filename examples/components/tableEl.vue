@@ -1,24 +1,55 @@
 <template>
-    <div class="wrap">
-        <zy-table :column="columnData" :table-data="tableData" :table-loading="tableLoading" :isSelection="true"
-            :handleSelectionChange="handleSelectionChange" :pageInfo="pageInfo"
-            :handleCurrentChange="handleCurrentChange" :isHavePages="isHavePages" :headerCellStyles="headerCellStyles"
-            :isStripe="isStripe" :handleSizeChange="handleSizeChange">
-            <div slot="protocolSlot" slot-scope="scope">
-                <div>这是一个protocolSlot内容{{ 1 || scope }}</div>
+    <div class="category-instance__example">
+        <div class="example-component">
+            <div class="example-component__card">
+                <div class="example-component__card__title">全部功能</div>
+                <div class="item">
+                    <zy-table :column="columnData" :table-data="tableData" :table-loading="tableLoading" :isSelection="true"
+                              :handleSelectionChange="handleSelectionChange" :pageInfo="pageInfo"
+                              :handleCurrentChange="handleCurrentChange" :isHavePages="isHavePages" :headerCellStyles="headerCellStyles"
+                              :isStripe="isStripe" :handleSizeChange="handleSizeChange">
+                        <div slot="protocolSlot" slot-scope="scope">
+                            <div>这是一个protocolSlot内容{{ 1 || scope }}</div>
+                        </div>
+                        <div slot="theadHeaderSlot1" slot-scope="scope">
+                            <div>表头{{ scope }}</div>
+                        </div>
+                        <div slot="tableSlot" slot-scope="scope">
+                            <div @click="tableSlotMed(scope.row)">表格tableSlot{{ scope.index }}</div>
+                        </div>
+                        <div slot="newSlot" slot-scope="scope">
+                            <div @click="tableSlotMed(scope.row.name)">newSlot{{ scope.index }}</div>
+                        </div>
+                        <!-- 底部插槽 -->
+                        <div slot="pageLeft">底部插槽</div>
+                    </zy-table>
+                </div>
             </div>
-            <div slot="theadHeaderSlot1" slot-scope="scope">
-                <div>表头{{ scope }}</div>
+
+            <div class="example-component__card">
+                <div class="example-component__card__title">空数据展示</div>
+                <div class="item">
+                    <zy-table :column="columnData" :table-data="[]" :table-loading="tableLoading" :isSelection="true"
+                              :handleSelectionChange="handleSelectionChange" :pageInfo="pageInfo"
+                              :handleCurrentChange="handleCurrentChange" :isHavePages="isHavePages" :headerCellStyles="headerCellStyles"
+                              :isStripe="isStripe" :handleSizeChange="handleSizeChange">
+                        <div slot="protocolSlot" slot-scope="scope">
+                            <div>这是一个protocolSlot内容{{ 1 || scope }}</div>
+                        </div>
+                        <div slot="theadHeaderSlot1" slot-scope="scope">
+                            <div>表头{{ scope }}</div>
+                        </div>
+                        <div slot="tableSlot" slot-scope="scope">
+                            <div @click="tableSlotMed(scope.row)">表格tableSlot{{ scope.index }}</div>
+                        </div>
+                        <div slot="newSlot" slot-scope="scope">
+                            <div @click="tableSlotMed(scope.row.name)">newSlot{{ scope.index }}</div>
+                        </div>
+                        <div slot="empty">空数据</div>
+                    </zy-table>
+                </div>
             </div>
-            <div slot="tableSlot" slot-scope="scope">
-                <div @click="tableSlotMed(scope.row)">表格tableSlot{{ scope.index }}</div>
-            </div>
-            <div slot="newSlot" slot-scope="scope">
-                <div @click="tableSlotMed(scope.row.name)">newSlot{{ scope.index }}</div>
-            </div>
-            <!-- 底部插槽 -->
-            <div slot="pageLeft">1111</div>
-        </zy-table>
+        </div>
     </div>
 </template>
 <script>
@@ -209,9 +240,8 @@ export default {
 }
 </script>
 
-<style>
-.wrap {
-    padding: 20px;
-    background-color: #fff;
+<style lang="scss" scoped>
+.example-component__card {
+    width: 100%;
 }
 </style>
