@@ -237,7 +237,7 @@ export default {
             console.log(val);
         },
         rowClick(row){
-            console.log(row);
+            console.log(row,9999);
         }
     }
 }
