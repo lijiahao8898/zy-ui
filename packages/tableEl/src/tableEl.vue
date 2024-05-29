@@ -5,6 +5,7 @@
             :element-loading-background="loadingColor" tooltip-effect="dark" :class="{'tableEl-style' : isTableClass}"  :border="isBorder"
             :row-class-name="rowClassName" 
             :header-cell-style="headerCellStyles" 
+            :row-click="rowClick"
 
             :stripe="isStripe"
             @selection-change="handleSelectionChange">
@@ -216,6 +217,13 @@ export default {
         },
         // 页码总数改变方法 
         handleSizeChange:{
+            type: Function,
+            default: () => {
+                return () => { }
+            }
+        },
+        // 行点击 
+        rowClick:{
             type: Function,
             default: () => {
                 return () => { }

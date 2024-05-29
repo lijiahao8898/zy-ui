@@ -7,7 +7,7 @@
                     <zy-table :column="columnData" :table-data="tableData" :table-loading="tableLoading" :isSelection="true"
                               :handleSelectionChange="handleSelectionChange" :pageInfo="pageInfo"
                               :handleCurrentChange="handleCurrentChange" :isHavePages="isHavePages" :headerCellStyles="headerCellStyles"
-                              :isStripe="isStripe" :handleSizeChange="handleSizeChange">
+                              :isStripe="isStripe" :handleSizeChange="handleSizeChange" :rowClick="rowClick">
                         <div slot="protocolSlot" slot-scope="scope">
                             <div>这是一个protocolSlot内容{{ 1 || scope }}</div>
                         </div>
@@ -236,6 +236,9 @@ export default {
         handleSizeChange(val) {
             console.log(val);
         },
+        rowClick(row){
+            console.log(row);
+        }
     }
 }
 </script>
