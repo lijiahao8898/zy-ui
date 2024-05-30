@@ -45,6 +45,7 @@ import ExampleWaterfall from './components/waterfall'
 import ExampleAnimate from './components/animate'
 import ExampleElm from './components/elElement'
 import ExampleTable from './components/tableEl.vue'
+import ExampleFontTitle from './components/fontTitle.vue'
 
 export default {
     name: 'App',
@@ -65,6 +66,7 @@ export default {
         ExampleAnimate,
         ExampleElm,
         ExampleTable,
+        ExampleFontTitle
     },
     data() {
         return {
@@ -96,6 +98,7 @@ export default {
                 {label: '动画', value: 'ExampleAnimate'},
                 {label: 'elementUI', value: 'ExampleElm'},
                 {label: '表格', value: 'ExampleTable'},
+                {label: '字体渐变', value: 'ExampleFontTitle'},
             ],
         }
     },

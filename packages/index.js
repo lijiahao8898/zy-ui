@@ -17,6 +17,7 @@ import Voice from "./animate";
 import ele from './ele/index'
 import zyElmUpload from './elm/upload'
 import tableEl from './tableEl/src/tableEl.vue'
+import fontTitle from './fontTitle/src/fontTitle.vue'
 
 const components = [
     Item,
@@ -36,7 +37,8 @@ const components = [
     ImageCompare,
     Voice,
     zyElmUpload,
-    tableEl
+    tableEl,
+    fontTitle
 ]
 
 const install = (Vue) => {
