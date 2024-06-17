@@ -21,7 +21,14 @@ if(process.env.NODE_ENV === 'production') {
         configureWebpack: {
             entry: entries,
             optimization: {
-                minimize: false
+                minimize: false,
+                minimizer: [
+                    (compiler) => {
+                        console.log(compiler)
+                        const option = compiler.options.terserOptions.compress;
+                        option.drop_console = false; // 打开开关
+                    }
+                ]
             },
             output: {
                 filename: '[name]/index.js',
@@ -51,6 +58,7 @@ if(process.env.NODE_ENV === 'production') {
         chainWebpack: config => {
             // 删除splitChunks，在打包组件的时候，并不希望抽离每个组件的公共js出来，而是每个独立打包，于是删除这个配置
             config.optimization.delete('splitChunks')
+            config.optimization.minimizer
             // 删除copy：不要复制public文件到打包目录
             config.plugins.delete('copy')
             // 删除preload以及prefetch，因为删除了html插件，所以这两个也没用；

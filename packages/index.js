@@ -15,7 +15,7 @@ import VerifyBox from "./verifyBox";
 import ImageCompare from './imageCompare'
 import Voice from "./animate";
 import ele from './ele/index'
-import zyElmUpload from './elm/upload'
+import zyElmUpload from './element/upload'
 import tableEl from './tableEl/src/tableEl.vue'
 
 const components = [
@@ -42,10 +42,10 @@ const components = [
 const install = (Vue) => {
     if(install.installed) return
     install.installed = true
+    Vue.use(ele)
     components.map(component => {
         Vue.component(component.name, component)
     })
-    Vue.use(ele)
 }
 
 if (typeof window !== 'undefined' && window.Vue) {
