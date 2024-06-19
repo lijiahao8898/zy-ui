@@ -5,7 +5,7 @@
                 <div class="category-sub"
                      v-for="(item, index) in categoryList"
                      :key="index"
-                     :class="{active: currentCategory === `${index}`}"
+                     :class="{active: String(currentCategory) === `${index}`}"
                      @click="toggleHandler(`${index}`, item)"
                 >
                     <div class="category-sub__title">{{ item.label }}</div>
@@ -45,6 +45,7 @@ import ExampleWaterfall from './components/waterfall'
 import ExampleAnimate from './components/animate'
 import ExampleElm from './components/elElement'
 import ExampleTable from './components/tableEl.vue'
+import ExampleMind from './components/mind.vue'
 
 export default {
     name: 'App',
@@ -65,6 +66,7 @@ export default {
         ExampleAnimate,
         ExampleElm,
         ExampleTable,
+        ExampleMind,
     },
     data() {
         return {
@@ -96,6 +98,7 @@ export default {
                 {label: '动画', value: 'ExampleAnimate'},
                 {label: 'elementUI', value: 'ExampleElm'},
                 {label: '表格', value: 'ExampleTable'},
+                {label: '思维导图', value: 'ExampleMind'},
             ],
         }
     },
@@ -186,8 +189,12 @@ export default {
                 transition: background, font-size .3s;
                 text-align: left;
                 text-indent: 50px;
+            }
 
-                &:hover, &.active {
+            &:hover, &.active {
+
+
+                .category-sub__title {
                     font-weight: bold;
                     font-size: 16px;
                     color: var(--theme-color);
@@ -254,7 +261,7 @@ export default {
     border-radius: 4px;
     background: #F1F8FF;
     padding: 20px;
-    width: 20%;
+    min-width: 20%;
     margin: 0 10px 10px 0;
 
     .item {
