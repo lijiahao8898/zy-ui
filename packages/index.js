@@ -18,6 +18,7 @@ import ele from './ele/index'
 import zyElmUpload from './element/upload'
 import tableEl from './tableEl/src/tableEl.vue'
 import zyMind from './mind/src/mind.vue'
+import fontTitle from './fontTitle/src/fontTitle.vue'
 
 const components = [
     Item,
@@ -38,7 +39,8 @@ const components = [
     Voice,
     zyElmUpload,
     tableEl,
-    zyMind
+    zyMind,
+    fontTitle
 ]
 
 const install = (Vue) => {

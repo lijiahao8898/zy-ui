@@ -46,6 +46,7 @@ import ExampleAnimate from './components/animate'
 import ExampleElm from './components/elElement'
 import ExampleTable from './components/tableEl.vue'
 import ExampleMind from './components/mind.vue'
+import ExampleFontTitle from './components/fontTitle.vue'
 
 export default {
     name: 'App',
@@ -66,6 +67,7 @@ export default {
         ExampleAnimate,
         ExampleElm,
         ExampleTable,
+        ExampleFontTitle,
         ExampleMind,
     },
     data() {
@@ -98,6 +100,7 @@ export default {
                 {label: '动画', value: 'ExampleAnimate'},
                 {label: 'elementUI', value: 'ExampleElm'},
                 {label: '表格', value: 'ExampleTable'},
+                {label: '字体渐变', value: 'ExampleFontTitle'},
                 {label: '思维导图', value: 'ExampleMind'},
             ],
         }
