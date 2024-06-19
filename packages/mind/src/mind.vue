@@ -1,7 +1,7 @@
 <template>
     <div class="mind" :id="`zyMind${random}`">
         <div class="mind-item"
-             @mousedown="(e) => onMouseDown(e, item, index)"
+             @mousedown.prevent="(e) => onMouseDown(e, item, index)"
              :class="[`mind-item-${item.id}-${random}`]" v-for="(item, index) in dataSource" :key="index"
              :style="getStyle(item)">
             {{ item.label }}
@@ -214,6 +214,7 @@ export default {
             let height = dom.offsetHeight
             let x = event.target.offsetLeft;
             let y = event.target.offsetTop;
+            this.$emit('move', {x, y, index})
             var disX = event.clientX - event.target.offsetLeft
             var disY = event.clientY - event.target.offsetTop
             let maxX = width - target.offsetWidth
@@ -250,13 +251,13 @@ export default {
 
 <style lang="scss" scoped>
 .mind {
-    background: #f0f0f0;
+    background-color: #ffffff;
     height: 50vh;
     width: 100%;
     position: relative;
     user-select: none;
-    background: url("./images/bg.png") repeat 0 0;
-    background-size: 5px 5px;
+    background-image: url("./images/bg.svg");
+    border: 1px solid #dfe3e8;
 
     .mind-item {
         background: #fff;
@@ -277,7 +278,7 @@ export default {
     .mind-canvas {
         position: absolute;
         top: 0;
-        right: 0;
+        left: 0;
         z-index: 10;
     }
 }
