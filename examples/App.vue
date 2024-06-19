@@ -240,6 +240,7 @@ export default {
 
     &.flex {
         display: flex;
+        flex-wrap: wrap;
     }
 }
 

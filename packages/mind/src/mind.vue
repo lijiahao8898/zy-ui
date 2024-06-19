@@ -1,22 +1,24 @@
 <template>
-    <div class="mind" id="zyMind">
+    <div class="mind" :id="`zyMind${random}`">
         <div class="mind-item"
-             @mousedown="(e) => onMouseDown(e, item)"
-             :class="[`mind-item-${item.id}`]" v-for="(item, index) in dataSource" :key="index"
+             @mousedown="(e) => onMouseDown(e, item, index)"
+             :class="[`mind-item-${item.id}-${random}`]" v-for="(item, index) in dataSource" :key="index"
              :style="getStyle(item)">
             {{ item.label }}
         </div>
-        <canvas id="mindCanvas" class="mind-canvas"></canvas>
+        <canvas :id="`mindCanvas-${random}`" class="mind-canvas"></canvas>
     </div>
 </template>
 
 <script>
 export default {
     name: 'zy-mind',
-    data() {
-        return {
-            isDown: false,
-            dataSource: [
+    props: {
+        isDraggable:{
+            default: true
+        },
+        dataSource: {
+            default: [
                 {label: '中国石油化工集团有限公司浙江分公司', id: 1, x: 20, y: 200},
                 {label: '子公司', id: 2, x: 200, y: 200, empty: true},
                 {label: '中国石油化工集团有限公司', id: 3, x: 300, y: 200},
@@ -27,9 +29,10 @@ export default {
                 {label: '投资', id: 8, x: 800, y: 100, empty: true},
                 {label: '配偶', id: 9, x: 670, y: 220, empty: true, autoHeight: true},
                 {label: '法定代表人配偶', id: 10, x: 480, y: 280, empty: true, autoHeight: true},
-
-            ],
-            dataLinks: [
+            ]
+        },
+        dataLinks: {
+            default: [
                 {
                     source: 2,
                     target: 1
@@ -71,17 +74,24 @@ export default {
             ]
         }
     },
+    data() {
+        return {
+            isDown: false,
+            random: (Math.random() * 10000000000).toFixed(0)
+        }
+    },
     mounted() {
         this.draw()
     },
     methods: {
         draw () {
             this.$nextTick(() => {
-                const canvas = document.getElementById('mindCanvas')
+                const random = this.random
+                const canvas = document.getElementById(`mindCanvas-${random}`)
                 const ctx = canvas.getContext('2d')
                 // ------------ 解决canvas画布模糊的问题 -------------
                 const dpr = 3
-                const mind = document.getElementById('zyMind')
+                const mind = document.getElementById(`zyMind${random}`)
                 const oldWidth = mind.offsetWidth
                 const oldHeight = mind.offsetHeight
                 canvas.width = Math.round(oldWidth * dpr)
@@ -93,8 +103,8 @@ export default {
                 ctx.clearRect(0, 0, canvas.width, canvas.height)
                 for (let i = 0; i < this.dataLinks.length; i++) {
                     let item = this.dataLinks[i];
-                    let start = document.getElementsByClassName(`mind-item-${item.source}`)[0]
-                    let end = document.getElementsByClassName(`mind-item-${item.target}`)[0]
+                    let start = document.getElementsByClassName(`mind-item-${item.source}-${random}`)[0]
+                    let end = document.getElementsByClassName(`mind-item-${item.target}-${random}`)[0]
                     let fromLeft = start.offsetLeft
                     let fromTop = start.offsetTop
                     let fromWidth = start.offsetWidth
@@ -194,19 +204,12 @@ export default {
             }
             return style
         },
-        dragHandler (e) {
-            const mind = document.getElementById('zyMind')
-            //item.x = item.x - e.offsetX
-            //item.y = item.y - e.offsetY
-            //this.draw()
-            console.log(mind.offsetLeft, mind.offsetTop)
-            console.log(e.offsetLeft - mind.offsetLeft, e.offsetTop - mind.offsetTop)
-            console.log(e)
-        },
-        onMouseDown (event, item) {
+        onMouseDown (event, item, index) {
+            if(!this.isDraggable) return
             this.isDown = true
-            let dom = document.getElementById('zyMind')
-            let target = document.getElementsByClassName(`mind-item-${item.id}`)[0]
+            const random = this.random
+            let dom = document.getElementById(`zyMind${random}`)
+            let target = document.getElementsByClassName(`mind-item-${item.id}-${random}`)[0]
             let width = dom.offsetWidth
             let height = dom.offsetHeight
             let x = event.target.offsetLeft;
@@ -231,8 +234,8 @@ export default {
                 } else if (y <= 0) {
                     y = 0
                 }
-                item.x = x
-                item.y = y
+
+                this.$emit('move', {x, y, index})
             }
             document.onmouseup = () => {
                 this.isDown = false;
