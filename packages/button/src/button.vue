@@ -1,12 +1,25 @@
 <template>
-    <div class="zy-button">
+    <div class="zy-button" @click="clickHandle">
         zy-button
     </div>
 </template>
 
 <script>
 export default {
-    name: "zy-button"
+    name: "zy-button",
+    props: ['name'],
+    data () {
+        return {
+            hha: 223,
+        }
+    },
+    methods: {
+        clickHandle () {
+            // this.$options.cancel()
+            console.log(this)
+            console.log(this.name)
+        }
+    }
 }
 </script>
 

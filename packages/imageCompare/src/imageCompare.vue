@@ -17,7 +17,7 @@
                     height: height + 'px'
                 }"
             >
-                <img src="./images/comapre.jpg" alt="">
+<!--                <img src="./images/comapre.jpg" alt="">-->
             </div>
         </div>
         <div class="image-compare__after" @click="goRight">
@@ -27,7 +27,7 @@
                     height: height + 'px'
                 }"
             >
-                <img src="./images/5.jpg" alt="">
+<!--                <img src="./images/5.jpg" alt="">-->
             </div>
         </div>
         <div class="divider-bar" :style="{left: x + 'px'}" @mousedown.prevent="onMouseDown()"></div>
@@ -97,6 +97,10 @@ export default {
         z-index: 1;
         width: 50%;
         overflow: hidden;
+
+        > div {
+            background: #c63e3e;
+        }
     }
 
     .image-compare__after {
@@ -104,6 +108,10 @@ export default {
         top: 0;
         left: 0;
         z-index: 0;
+
+        > div {
+            background: #00ff62;
+        }
     }
 
     img {

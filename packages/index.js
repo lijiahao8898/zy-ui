@@ -19,6 +19,7 @@ import zyElmUpload from './element/upload'
 import tableEl from './tableEl/src/tableEl.vue'
 import zyMind from './mind/src/mind.vue'
 import fontTitle from './fontTitle/src/fontTitle.vue'
+import ModalDialog from './modalDialog'
 
 const components = [
     Item,
@@ -43,10 +44,11 @@ const components = [
     fontTitle
 ]
 
-const install = (Vue) => {
+const install = (Vue, options = {}) => {
     if(install.installed) return
     install.installed = true
     Vue.use(ele)
+    Vue.use(ModalDialog, options)
     components.map(component => {
         Vue.component(component.name, component)
     })

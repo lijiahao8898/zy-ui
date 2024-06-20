@@ -6,14 +6,14 @@
                      v-for="(item, index) in categoryList"
                      :key="index"
                      :class="{active: String(currentCategory) === `${index}`}"
-                     @click="toggleHandler(`${index}`, item)"
+                     @click.prevent="toggleHandler(`${index}`, item)"
                 >
                     <div class="category-sub__title">{{ item.label }}</div>
                     <div class="category-title"
                          v-for="(sub, subIndex) in item.child"
                          :key="subIndex"
                          :class="{active: currentCategory === `${index}-${subIndex}`}"
-                         @click.stop="toggleHandler(`${index}-${subIndex}`, item)"
+                         @click.stop="toggleHandler(`${index}-${subIndex}`, sub)"
                     >
                         {{ sub.label }}
                     </div>
@@ -75,62 +75,89 @@ export default {
             currentComponent: 'basic',
             currentCategory: 1,
             categoryList: [
-                {label: '条目', value: 'Basic'},
-                {label: '进度条 - progress', value: 'ExampleProgress'},
-                {label: '推荐度', value: 'ExampleScore'},
-                {label: '选择框 - select', value: 'ExampleSelect'},
-                {label: '翻牌', value: 'ExampleFlip'},
-                {label: '圆形滚动', value: 'ExampleScroll'},
                 {
-                    label: '特效',
-                    value: 'ExampleTextRain',
+                    label: '基础',
                     child: [
-                        {
-                            label: '文字雨特效',
-                            value: 'ExampleTextRain'
-                        },
+                        {label: '条目', value: 'Basic'},
+                        {label: '进度条 - progress', value: 'ExampleProgress'},
+                        {label: '推荐度', value: 'ExampleScore'},
+                        {label: '选择框 - select', value: 'ExampleSelect'},
+                        {label: '五角星', value: 'ExampleShape'},
+                        {label: '字体渐变', value: 'ExampleFontTitle'},
+                        {label: '瀑布流', value: 'ExampleWaterfall'},
+                        {label: '思维导图', value: 'ExampleMind'},
                     ]
                 },
-                {label: '步骤', value: 'ExampleStep'},
-                {label: '自定义五角星', value: 'ExampleShape'},
-                {label: '瀑布流', value: 'ExampleWaterfall'},
-                {label: '关系图', value: 'ExampleRelation'},
-                {label: '验证码输入框', value: 'ExampleVerify'},
-                {label: '图片对比', value: 'ExampleCompare'},
-                {label: '动画', value: 'ExampleAnimate'},
-                {label: 'elementUI', value: 'ExampleElm'},
-                {label: '表格', value: 'ExampleTable'},
-                {label: '字体渐变', value: 'ExampleFontTitle'},
-                {label: '思维导图', value: 'ExampleMind'},
+                {
+                    label: '业务组件',
+                    child: [
+                        {label: '步骤', value: 'ExampleStep'},
+                        {label: '关系图', value: 'ExampleRelation'},
+                        {label: '验证码输入框', value: 'ExampleVerify'},
+                        {label: '图片对比', value: 'ExampleCompare'},
+                    ]
+                },
+                {
+                    label: 'element-ui',
+                    child: [
+                        {label: '图片上传', value: 'ExampleElm'},
+                        {label: '表格', value: 'ExampleTable'},
+                    ]
+                },
+                {
+                    label: '其他',
+                    child: [
+                        {label: '文字雨特效', value: 'ExampleTextRain'},
+                        {label: '动画', value: 'ExampleAnimate'},
+                        {label: '翻牌', value: 'ExampleFlip'},
+                        {label: '圆形滚动', value: 'ExampleScroll'},
+                    ]
+                },
             ],
         }
     },
     mounted() {
         console.log(this.getUrlParams())
+        this.$modalDialog(() => import('../packages/button/index'), {
+            name: '999'
+        }, '.category-instance')
+        console.log(this)
+        // setTimeout(() => {
+        //     this.$modalDialog.destroy
+        // }, 3000)
         this.currentCategory = this.getUrlParams().cur
         if(this.currentCategory.indexOf('-') !== -1) {
             let [a, b] = this.currentCategory.split('-')
             this.currentComponent = this.categoryList[a].child[b].value
         } else {
-            this.currentComponent = this.categoryList[this.currentCategory].value
+            if(this.categoryList[this.currentCategory]) {
+                this.currentComponent = this.categoryList[this.currentCategory].value
+            }
         }
     },
     methods: {
-        getUrlParams:function(){
-            var args=new Object();
-            var query=location.search.substring(1);//获取查询串
-            var pairs=query.split("&");//在逗号处断开
-            for(var i=0;i<pairs.length;i++)
-            {
-                var pos=pairs[i].indexOf('=');//查找name=value
-                if(pos==-1) continue;//如果没有找到就跳过
-                var argname=pairs[i].substring(0,pos);//提取name
-                var value=pairs[i].substring(pos+1);//提取value
-                args[argname]=unescape(value);//存为属性
+        getUrlParams: function () {
+            let args = {};
+            // 获取查询串
+            let query = location.search.substring(1);
+            // 在逗号处断开
+            let pairs = query.split("&");
+            // 查找name=value
+            for (let i = 0; i < pairs.length; i++) {
+                let pos = pairs[i].indexOf('=');
+                // 如果没有找到就跳过
+                if (pos == -1) continue;
+                // 提取name
+                let argname = pairs[i].substring(0, pos);
+                // 提取value
+                let value = pairs[i].substring(pos + 1);
+                // 存为属性
+                args[argname] = unescape(value);
             }
             return args;
         },
         toggleHandler(index, {value}) {
+            if(!value) return
             this.currentCategory = index;
             this.currentComponent = value;
             history.replaceState('', '',`${window.location.origin}?cur=${this.currentCategory}`)
@@ -184,42 +211,57 @@ export default {
         }
 
         &-sub {
+            padding: 0 20px;
             &__title {
-                font-size: 14px;
-                line-height: 45px;
+                font-size: 16px;
+                line-height: 20px;
+                padding-top: 15px;
+                padding-bottom: 5px;
                 cursor: pointer;
                 color: var(--inactive-color);
                 transition: background, font-size .3s;
                 text-align: left;
-                text-indent: 50px;
+                text-indent: 10px;
             }
 
             &:hover, &.active {
-
-
                 .category-sub__title {
                     font-weight: bold;
                     font-size: 16px;
-                    color: var(--theme-color);
+                    color: var(--inactive-color);
                 }
             }
         }
 
         &-title {
-            font-size: 16px;
-            height: 40px;
-            line-height: 40px;
+            font-size: 14px;
+            height: 34px;
+            line-height: 34px;
+            margin-bottom: 2px;
             cursor: pointer;
-            transition: background, font-size .3s;
             text-align: left;
-            text-indent: 50px;
             color: var(--theme-color);
+            background: transparent;
+            border-radius: 8px;
+            position: relative;
+            padding-left: 28px;
+
+            &:before {
+                content: "";
+                width: 8px;
+                height: 8px;
+                background: var(--theme-color);
+                position: absolute;
+                left: 10px;
+                top: 12px;
+                border-radius: 20px;
+            }
 
             &:hover, &.active {
                 background: rgba(16, 18, 27, 0.4);
                 font-weight: bold;
-                font-size: 16px;
-                box-shadow: 1px 0 5px rgba(255, 255, 255, 0.2) inset;
+                font-size: 14px;
+                color: var(--theme-color);
             }
         }
     }
