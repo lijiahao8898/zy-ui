@@ -14,11 +14,14 @@ import Relation from './Relation';
 import VerifyBox from "./verifyBox";
 import ImageCompare from './imageCompare'
 import Voice from "./animate";
-import ele from './ele/index'
-import zyElmUpload from './element/upload'
-import tableEl from './tableEl/src/tableEl.vue'
-import zyMind from './mind/src/mind.vue'
-import fontTitle from './fontTitle/src/fontTitle.vue'
+import Mind from './mind/src/mind.vue'
+import FontTitle from './fontTitle/src/fontTitle.vue'
+
+import ElmUpload from './element/upload'
+import ElmTable from './element/table/src/table.vue'
+
+import element from './element'
+
 import ModalDialog from './modalDialog'
 
 const components = [
@@ -38,16 +41,16 @@ const components = [
     VerifyBox,
     ImageCompare,
     Voice,
-    zyElmUpload,
-    tableEl,
-    zyMind,
-    fontTitle
+    ElmUpload,
+    ElmTable,
+    Mind,
+    FontTitle
 ]
 
 const install = (Vue, options = {}) => {
     if(install.installed) return
     install.installed = true
-    Vue.use(ele)
+    Vue.use(element)
     Vue.use(ModalDialog, options)
     components.map(component => {
         Vue.component(component.name, component)

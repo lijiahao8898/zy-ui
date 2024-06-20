@@ -8,5 +8,6 @@
   "zy-flip": "./packages/flip/index.js",
   "zy-count-up-slide": "./packages/countUpSlide/index.js",
   "zy-circle-scroll": "./packages/circleScroll/index.js",
-  "zy-table": "./packages/tableEl/index.js"
+  "zy-table": "./packages/element/table/index.js",
+  "zy-mind": "./packages/mind/index.js"
 }
