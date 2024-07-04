@@ -1,8 +1,13 @@
 <template>
     <div :class="{'table-wrap':isTableClass} ">
-        <el-table  ref="multipleTable" v-loading="tableLoading" :data="tableData" element-loading-text="拼命加载中"
-                   :height="height" element-loading-spinner="el-icon-loading"
-                   :element-loading-background="loadingColor" tooltip-effect="dark" :class="{'tableEl-style' : isTableClass}"  :border="isBorder"
+        <el-table  ref="multipleTable"
+                   :data="tableData"
+                   v-loading="tableLoading"
+                   element-loading-text="拼命加载中..."
+                   element-loading-spinner="el-icon-loading"
+                   :element-loading-background="loadingColor"
+                   :height="height"
+                   tooltip-effect="dark" :class="{'tableEl-style' : isTableClass}"  :border="isBorder"
                    :row-class-name="rowClassName"
                    :header-cell-style="headerCellStyles"
                    @row-click="rowClick"

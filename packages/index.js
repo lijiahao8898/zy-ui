@@ -17,8 +17,12 @@ import Voice from "./animate";
 import Mind from './mind/src/mind.vue'
 import FontTitle from './fontTitle/src/fontTitle.vue'
 
+/**
+ * element组件扩展
+ */
 import ElmUpload from './element/upload'
 import ElmTable from './element/table/src/table.vue'
+import ElmSearchGroup from './element/search-group/src/search-group.vue'
 
 import element from './element'
 
@@ -41,10 +45,11 @@ const components = [
     VerifyBox,
     ImageCompare,
     Voice,
+    Mind,
+    FontTitle,
     ElmUpload,
     ElmTable,
-    Mind,
-    FontTitle
+    ElmSearchGroup,
 ]
 
 const install = (Vue, options = {}) => {

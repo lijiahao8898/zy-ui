@@ -47,6 +47,7 @@ import ExampleElm from './components/elElement'
 import ExampleTable from './components/tableEl.vue'
 import ExampleMind from './components/mind.vue'
 import ExampleFontTitle from './components/fontTitle.vue'
+import ExampleSearchGroup from './components/element/search-group'
 
 export default {
     name: 'App',
@@ -69,6 +70,7 @@ export default {
         ExampleTable,
         ExampleFontTitle,
         ExampleMind,
+        ExampleSearchGroup,
     },
     data() {
         return {
@@ -102,6 +104,7 @@ export default {
                     child: [
                         {label: '图片上传', value: 'ExampleElm'},
                         {label: '表格', value: 'ExampleTable'},
+                        {label: '查询项', value: 'ExampleSearchGroup'},
                     ]
                 },
                 {
@@ -117,14 +120,13 @@ export default {
         }
     },
     mounted() {
-        console.log(this.getUrlParams())
-        this.$modalDialog(() => import('../packages/button/index'), {
-            name: '999'
-        }, '.category-instance')
-        console.log(this)
-        // setTimeout(() => {
-        //     this.$modalDialog.destroy
-        // }, 3000)
+        /**
+         * $modalDialog(component, props, target)
+         */
+        // this.$modalDialog(() => import('../packages/button/index'), {
+        //     name: '999'
+        // }, '.category-instance')
+
         this.currentCategory = this.getUrlParams().cur
         if(this.currentCategory.indexOf('-') !== -1) {
             let [a, b] = this.currentCategory.split('-')
