@@ -1,5 +1,6 @@
 const components = require('./components.json');
 const entries = {}
+const webpack = require('webpack')
 
 Object.keys(components).forEach((item) => {
     entries[item] = components[item];
@@ -39,6 +40,9 @@ if(process.env.NODE_ENV === 'production') {
                 libraryExport: 'default',
                 // 已经设置 libraryTarget: 'commonjs2'，无需设置 library
                 // library: 'zy-libraries',
+            },
+            externals: {
+                'element-ui': 'element-ui'
             },
             resolve: {
                 extensions: ['.js', '.vue', '.json'],
