@@ -159,6 +159,17 @@ export default {
                     slot: 'protocolSlot' // 插槽名
                 },
                 {
+                    type: '',
+                    label: 'render函数支持',
+                    prop: 'protocol',
+                    render: (h, params) => {
+                        console.log(params)
+                        return h('div', {
+
+                        }, 'render 函数')
+                    }
+                },
+                {
                     dataType: 'option',
                     label: '操作',
                     width: '300px',
