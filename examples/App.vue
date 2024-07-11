@@ -307,10 +307,12 @@ export default {
 .example-component__card {
     transition: all .3s;
     border-radius: 4px;
-    background: #F1F8FF;
+    background: transparent;
     padding: 20px;
     min-width: 20%;
     margin: 0 10px 10px 0;
+    border: 1px solid #F1F8FF;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 
     .item {
         margin-bottom: 15px;
@@ -318,8 +320,10 @@ export default {
 }
 
 .example-component__card .example-component__card__title {
-    font-size: 14px;
+    font-size: 16px;
     margin-bottom: 20px;
+    color: #fff;
+    font-weight: 600;
 }
 
 .example-component__title {
@@ -330,7 +334,8 @@ export default {
 }
 
 .example-component__card:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px #F1F8FF;
+    border: 1px solid #F1F8FF;
 }
 
 .example-component__item .item {

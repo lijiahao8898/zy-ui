@@ -1,7 +1,8 @@
 import Item from './item';
 import Button from './button'
 import Progress from './progress'
-import Pie from './pie'
+import ProgressRank from './progress-rank'
+import ProgressPie from './progress-pie'
 import StarScore from './starScore'
 import InsuranceSelect from "./insuranceSelect";
 import Flip from './flip';
@@ -32,7 +33,8 @@ const components = [
     Item,
     Button,
     Progress,
-    Pie,
+    ProgressRank,
+    ProgressPie,
     StarScore,
     InsuranceSelect,
     Flip,

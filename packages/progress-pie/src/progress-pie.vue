@@ -14,7 +14,7 @@
 
 <script>
 export default {
-    name: "zyPie",
+    name: "zyProgressPie",
     props: {
         "value": String,
         "ring": String,
