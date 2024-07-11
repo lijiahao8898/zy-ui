@@ -14,7 +14,7 @@
 export default {
     name: 'zy-mind',
     props: {
-        isDraggable:{
+        isDraggable: {
             default: true
         },
         dataSource: {
@@ -84,7 +84,7 @@ export default {
         this.draw()
     },
     methods: {
-        draw () {
+        draw() {
             this.$nextTick(() => {
                 const random = this.random
                 const canvas = document.getElementById(`mindCanvas-${random}`)
@@ -114,41 +114,79 @@ export default {
                     let toWidth = end.offsetWidth
                     let toHeight = end.offsetHeight
 
+                    ctx.beginPath();
+                    ctx.strokeStyle = item.color || 'red';
                     if (toLeft > fromLeft) {
                         // 第一种 to 在 from 的右下角
                         let fromX = fromLeft + fromWidth
                         let fromY = fromTop + fromHeight / 2
                         let toX = toLeft
                         let toY = toTop + toHeight / 2
-                        if(item.lineStyle === 'round') {
-                            ctx.beginPath();
+                        if (item.lineStyle === 'round') {
                             ctx.moveTo(fromX, fromY)
-                            fromX = fromX + 10
+                            fromX = fromX + 200
                             ctx.lineTo(fromX, fromY)
                             ctx.lineTo(fromX, toY)
-                            ctx.strokeStyle = item.color || 'red';
                             ctx.lineWidth = item.width || 1;
                             ctx.stroke();
+                            const fromYCache = fromY
                             fromY = toY
+
+                            this.drawArrow(ctx, fromX, fromY, toX, toY, item.width || 1, item.color || 'red', item)
+                            if (item.text) {
+                                // const metrics = ctx.measureText(item.text.label);
+                                this.drawText(ctx, item, item.text.position === 'start' ? fromX - 100 : fromX, item.text.position === 'start' ? fromYCache : fromYCache + ((toY - fromYCache) / 2))
+                            }
+                        } else {
+                            this.drawArrow(ctx, fromX, fromY, toX, toY, item.width || 1, item.color || 'red', item)
+                            if(item.text) {
+                                // const metrics = ctx.measureText(item.text.label);
+                                this.drawText(ctx, item, fromX + ((toX - fromX) / 2), fromY)
+                            }
                         }
-                        this.drawArrow(ctx, fromX, fromY, toX, toY, item.width || 1, item.color || 'red')
                     } else if (toLeft < fromLeft) {
                         // 第二种 to 在 from 的左上角
                         let fromX = fromLeft
                         let fromY = fromTop + fromHeight / 2
                         let toX = toLeft + toWidth
                         let toY = toTop + toHeight / 2
-                        this.drawArrow(ctx, fromX, fromY, toX, toY, item.width || 1, item.color || 'red')
+                        this.drawArrow(ctx, fromX, fromY, toX, toY, item.width || 1, item.color || 'red', item)
                     } else if (toLeft === fromLeft) {
-                        let fromX = fromLeft + fromWidth/2
+                        let fromX = fromLeft + fromWidth / 2
                         let fromY = fromTop + fromHeight
-                        let toX = toLeft + toWidth/2
+                        let toX = toLeft + toWidth / 2
                         let toY = toTop
-                        this.drawArrow(ctx, fromX, fromY, toX, toY, item.width || 1, item.color || 'red')
+                        this.drawArrow(ctx, fromX, fromY, toX, toY, item.width || 1, item.color || 'red', item)
+                        if(item.text) {
+                            const metrics = ctx.measureText(item.text.label);
+                            this.drawText(ctx, item, toX - metrics.width, fromY + ((toY - fromY) / 2))
+                        }
                     }
                 }
                 ctx.stroke()
             })
+        },
+        /**
+         * 绘制文字
+         */
+        drawText (ctx, item, x, y) {
+            setTimeout(() => {
+                ctx.save();
+                ctx.beginPath();
+                const textWidth = ctx.measureText(item.text.label).width;
+                const textHeight = parseInt(ctx.font); // 计算文字高度
+                // 设置字体样式
+                console.log(item.text.label, textWidth)
+                ctx.font = '16px';
+                // 绘制背景矩形
+                ctx.fillStyle = '#fff'; // 背景颜色
+                ctx.fillRect(x - textWidth/2  - 10, y - 10, textWidth + 10, textHeight + 10); // 背景矩形的位置和大小
+                // 绘制文字
+                ctx.fillStyle = '#000';
+                ctx.fillText(item.text.label, x - textWidth/2 - 5, y + 3);
+                ctx.closePath();
+                ctx.restore();
+            }, 300)
         },
         /**
          * 绘制箭头
@@ -159,10 +197,11 @@ export default {
          * @param toY 终点坐标
          * @param width 箭头线宽度
          * @param color 箭头颜色
-         *   * @param theta 三角斜边一直线夹角
+         * @param item 数据源
+         * @param theta 三角斜边一直线夹角
          * @param headlen 三角斜边长度
          */
-        drawArrow(ctx, fromX, fromY, toX, toY, width = 1, color = 'red', theta = 30, headlen = 10) {
+        drawArrow(ctx, fromX, fromY, toX, toY, width = 1, color = 'red', item, theta = 30, headlen = 10) {
             let angle = Math.atan2(fromY - toY, fromX - toX) * 180 / Math.PI;
             let angle1 = (angle + theta) * Math.PI / 180;
             let angle2 = (angle - theta) * Math.PI / 180;
@@ -199,13 +238,13 @@ export default {
                 style.boxShadow = 'unset'
                 style.padding = '0 15px'
             }
-            if(item.autoHeight) {
+            if (item.autoHeight) {
                 style.height = 'unset'
             }
             return style
         },
-        onMouseDown (event, item, index) {
-            if(!this.isDraggable) return
+        onMouseDown(event, item, index) {
+            if (!this.isDraggable) return
             this.isDown = true
             const random = this.random
             let dom = document.getElementById(`zyMind${random}`)
@@ -220,17 +259,17 @@ export default {
             let maxX = width - target.offsetWidth
             let maxY = height - target.offsetHeight
             document.onmousemove = (event) => {
-                if(this.isDown == false) {
+                if (this.isDown == false) {
                     return;
                 }
                 x = event.clientX - disX;
                 y = event.clientY - disY
-                if(x >= maxX) {
+                if (x >= maxX) {
                     x = maxX
                 } else if (x <= 0) {
                     x = 0
                 }
-                if(y >= maxY) {
+                if (y >= maxY) {
                     y = maxY
                 } else if (y <= 0) {
                     y = 0
